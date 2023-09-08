@@ -16,6 +16,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.example.tableclocks.databinding.ActivityMainBinding
 import java.text.SimpleDateFormat
@@ -44,6 +45,7 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(application, SettingsActivity::class.java)
             startActivity(intent)
         })
+        binding.settingsBtn.setImageResource(R.drawable.baseline_settings_24)
 
 
         //開発者モード
@@ -98,18 +100,17 @@ class MainActivity : AppCompatActivity() {
         val pref = getSharedPreferences("com.tableClocks.settings",Context.MODE_PRIVATE)
         val themeName = pref.getString("themeName","jpseasons")
 
-        //データ整形
-        val mainImgName = "m_"+themeName+"_"+month.padStart(2,'0')  //m_jpseasons_01のようにする
+        //データ整形 m_jpseasons_01のようにする
+        val str = themeName+"_"+month.padStart(2,'0')
+        val mainImgName = "m_$str"
+        val mainBGColor = "col_$str"
+        val drawableBG = ResourcesCompat.getDrawable(resources , R.drawable.mbg_simple , null )
 
         //メインイメージセット
         binding.mainOverImage.setImageResource(resources.getIdentifier(mainImgName, "drawable", packageName))        //getIdentifierを使う方法、Stringが使えるので引き出しやすそう
         //時計背景セット
-        val drawableBG = ResourcesCompat.getDrawable(resources , R.drawable.mbg_simple , null )
-        //drawableBG?.setTint(Color.parseColor("#000000")) //▶半分
         binding.mainBGImage.setImageDrawable(drawableBG)
-        binding.wrap.setBackgroundColor(Color.parseColor("#634ecc"))//◀半分 キーカラー
-
-        binding.settingsBtn.setImageResource(R.drawable.baseline_settings_24)
+        binding.wrap.setBackgroundColor(ContextCompat.getColor(this, resources.getIdentifier(mainBGColor, "color", packageName)))//◀半分 キーカラー
 
     }
 
