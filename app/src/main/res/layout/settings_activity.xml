@@ -3,7 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintlayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:clipToPadding="false">
+
+    <TextView
+        android:id="@+id/settingstitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#464646"
+        android:fontFamily="@font/rounded_mplus_1c_bold"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="@string/settingstitle"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:elevation="4dp"/>
 
     <FrameLayout
         android:id="@+id/settingsFrame"
@@ -12,7 +30,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/settingstitle">
 
     </FrameLayout>
 
@@ -20,10 +38,10 @@
         android:id="@+id/backButton"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:background="#00FFFFFF"
         android:contentDescription="backButton"
+        app:layout_constraintBottom_toBottomOf="@+id/settingstitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/baseline_clear_24" />

@@ -108,9 +108,10 @@ class MainActivity : AppCompatActivity() {
 
         //メインイメージセット
         binding.mainOverImage.setImageResource(resources.getIdentifier(mainImgName, "drawable", packageName))        //getIdentifierを使う方法、Stringが使えるので引き出しやすそう
-        //時計背景セット
-        binding.mainBGImage.setImageDrawable(drawableBG)
         binding.wrap.setBackgroundColor(ContextCompat.getColor(this, resources.getIdentifier(mainBGColor, "color", packageName)))//◀半分 キーカラー
+        //カバー画像セット
+        binding.mainImageCover.setImageDrawable(drawableBG)
+
 
     }
 
