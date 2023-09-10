@@ -6,10 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:background="@drawable/ov_jpseasons"
+    android:background="@drawable/shape_rounded_corners_10dp"
     android:contentDescription="theme list items"
-    android:outlineProvider="bounds"
->
+    android:elevation="4dp"
+    android:outlineProvider="background">
 
     <ImageView
         android:id="@+id/settingItemInnerCover"

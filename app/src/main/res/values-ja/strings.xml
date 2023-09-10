@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">tableclocks</string>
+    <string name="app_name">テーブルクロック</string>
     <string name="settingstitle">テーマ一覧</string>
 </resources>
