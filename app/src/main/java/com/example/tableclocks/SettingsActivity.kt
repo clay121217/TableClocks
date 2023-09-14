@@ -38,6 +38,6 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
-//    val pref = getSharedPreferences("com.tableClocks.settings", Context.MODE_PRIVATE)
+//    val pref = getSharedPreferences("com.TableClocks.settings", Context.MODE_PRIVATE)
 //    val themeName = pref.getString("themeName","jpseasons")
 }

@@ -12,6 +12,7 @@ import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
 import android.view.WindowManager
+import android.view.animation.AlphaAnimation
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +20,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.example.tableclocks.databinding.ActivityMainBinding
+import kotlinx.coroutines.delay
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -97,7 +99,7 @@ class MainActivity : AppCompatActivity() {
     //テーマ画像セット
     private fun themeImageSet(month:String){
         //設定読み込み
-        val pref = getSharedPreferences("com.tableClocks.settings",Context.MODE_PRIVATE)
+        val pref = getSharedPreferences("com.TableClocks.settings",Context.MODE_PRIVATE)
         val themeName = pref.getString("themeName","jpseasons")
 
         //データ整形 m_jpseasons_01のようにする
@@ -108,7 +110,8 @@ class MainActivity : AppCompatActivity() {
 
         //メインイメージセット
         binding.mainOverImage.setImageResource(resources.getIdentifier(mainImgName, "drawable", packageName))        //getIdentifierを使う方法、Stringが使えるので引き出しやすそう
-        binding.wrap.setBackgroundColor(ContextCompat.getColor(this, resources.getIdentifier(mainBGColor, "color", packageName)))//◀半分 キーカラー
+        //背景色セット
+        binding.mainBG.setBackgroundColor(ContextCompat.getColor(this, resources.getIdentifier(mainBGColor, "color", packageName)))//◀半分 キーカラー
         //カバー画像セット
         binding.mainImageCover.setImageDrawable(drawableBG)
 
@@ -117,11 +120,32 @@ class MainActivity : AppCompatActivity() {
 
     //時計・テーマのフェードイン
     //フェードインは、背景色がついてメイン画像が外から入ってくる
+    private fun fadInMain(){
+        // アルファ値を1.0fから0.0fへ変化させるフェードアウトアニメーション
+        val fadeAnim = AlphaAnimation(0.0f, 1.0f)
+        // 5秒間(5000ミリ秒)かけて行う
+        fadeAnim.duration = 800
+        // アルファ値をアニメーション終了後の値を維持する
+        fadeAnim.fillAfter = true
+
+        binding.mainOverImage.animation = fadeAnim
+        binding.mainBG.animation = fadeAnim
+    }
 
     //時計・テーマの切り替えフェードアウト
     //フェードアウトは、背景色が黒に・メイン画像が外に抜けるイメージ
 
+    private fun fadOutMain(){
+        // アルファ値を1.0fから0.0fへ変化させるフェードアウトアニメーション
+        val fadeAnim = AlphaAnimation(1.0f, 0.0f)
+        // 5秒間(5000ミリ秒)かけて行う
+        fadeAnim.duration = 800
+        // アルファ値をアニメーション終了後の値を維持する
+        fadeAnim.fillAfter = true
 
+        binding.mainOverImage.animation = fadeAnim
+        binding.mainBG.animation = fadeAnim
+    }
 
     //テスト用ボタン
     //月を切り替えられるように
@@ -139,21 +163,21 @@ class MainActivity : AppCompatActivity() {
             var month = 1
             //リスナー
             themeTestButton.setOnClickListener {
+                fadOutMain()
                 var monthStr = month.toString().padStart(2,'0')
-                themeImageSet(monthStr)
+                _handler?.postDelayed( {
+                    themeImageSet(monthStr)
+                    fadInMain()
+                }, 900)
+
                 Toast.makeText(this, "変更しました$month", Toast.LENGTH_SHORT).show()
                 if(month < 12){
                     month += 1
                 }else{
                     month = 1
                 }
-
-
             }
-
         }
-
-
     }
 
 
