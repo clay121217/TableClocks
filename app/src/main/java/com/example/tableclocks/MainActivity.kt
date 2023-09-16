@@ -102,10 +102,10 @@ class MainActivity : AppCompatActivity() {
         val pref = getSharedPreferences("com.TableClocks.settings",Context.MODE_PRIVATE)
         val themeName = pref.getString("themeName","jpseasons")
 
-        //データ整形 m_jpseasons_01のようにする
-        val str = themeName+"_"+month.padStart(2,'0')
-        val mainImgName = "m_$str"
-        val mainBGColor = "col_$str"
+        //データ整形 jpseasons_m_01のようにする
+        val mainImgName = themeName+"_m_"+month.padStart(2,'0')
+        val mainBGColor = themeName+"_col_"+month.padStart(2,'0')
+
         val drawableBG = ResourcesCompat.getDrawable(resources , R.drawable.mbg_simple , null )
 
         //メインイメージセット

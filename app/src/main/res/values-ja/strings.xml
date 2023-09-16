@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">テーブルクロック</string>
-    <string name="settingstitle">テーマ一覧</string>
+    <string name="settings_title">テーマ一覧</string>
+    <string name="back_button_description">戻る</string>
+    <string name="settings_button">設定</string>
 </resources>

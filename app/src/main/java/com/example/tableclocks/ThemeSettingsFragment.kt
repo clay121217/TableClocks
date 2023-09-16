@@ -15,7 +15,7 @@ import com.example.tableclocks.placeholder.PlaceholderContent
  */
 class ThemeSettingsFragment : Fragment() {
 
-    private var columnCount = 2
+    private var columnCount = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

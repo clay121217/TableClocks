@@ -17,7 +17,7 @@ class SettingsActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.settingsFrame, ThemeSettingsFragment())
+                .replace(R.id.themeSettingsFrame, ThemeSettingsFragment())
                 .commit()
         }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
