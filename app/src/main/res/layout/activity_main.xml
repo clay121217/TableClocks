@@ -40,7 +40,7 @@
         android:id="@+id/mainImageCover"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:alpha="0.75"
+        android:alpha="@dimen/imageCoverAlpha"
         android:background="#00DC9FA8"
         android:contentDescription="@string/main_image_cover_description"
         android:elevation="0dp"

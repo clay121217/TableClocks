@@ -4,4 +4,5 @@
     <string name="settings_title">テーマ一覧</string>
     <string name="back_button_description">戻る</string>
     <string name="settings_button">設定</string>
+    <string name="preview_text">サンプル</string>
 </resources>
