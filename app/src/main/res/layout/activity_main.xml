@@ -49,8 +49,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/mbg_simple"
-        tools:srcCompat="@drawable/mbg_simple" />
+        app:srcCompat="@drawable/cover_slash"
+        tools:srcCompat="@drawable/cover_slash" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clocksContent"

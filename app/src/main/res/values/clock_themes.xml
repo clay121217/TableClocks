@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  テーマリスト  -->
+    <string-array name="theme_id_arr">
+        <item>jpseasons</item>
+        <item>flowers</item>
+        <item>jpseasons</item>
+        <item>flowers</item>
+        <item>jpseasons</item>
+        <item>flowers</item>
+        <item>jpseasons</item>
+        <item>flowers</item>
+    </string-array>
+
+    <!--  jpseasons  -->
+    <string name="jpseasons_themeName_jp" translatable="false">日本の季節感</string>
+    <string name="jpseasons_themeName_en" translatable="false">JP Seasons</string>
+    <drawable name="jpseasons_cover">@drawable/cover_slash</drawable>
+    <string name="jpseasons_mode" translatable="false">DEFAULT_MODE</string>
+    <bool name="jpseasons_charge">false</bool>
+    <color name="jpseasons_col_01">#f78b1e</color>
+    <color name="jpseasons_col_02">#aa7c21</color>
+    <color name="jpseasons_col_03">#edc52e</color>
+    <color name="jpseasons_col_04">#dc9fa8</color>
+    <color name="jpseasons_col_05">#0096ff</color>
+    <color name="jpseasons_col_06">#634ecc</color>
+    <color name="jpseasons_col_07">#64a56c</color>
+    <color name="jpseasons_col_08">#1e2d5a</color>
+    <color name="jpseasons_col_09">#caa700</color>
+    <color name="jpseasons_col_10">#cd763e</color>
+    <color name="jpseasons_col_11">#c04135</color>
+    <color name="jpseasons_col_12">#68abd6</color>
+
+    <!--  flowers  -->
+    <string name="flowers_themeName_jp" translatable="false">季節の花</string>
+    <string name="flowers_themeName_en" translatable="false">Flowers</string>
+    <drawable name="flowers_cover">@drawable/cover_circle</drawable>
+    <string name="flowers_mode" translatable="false">DEFAULT_MODE</string>
+    <bool name="flowers_charge">false</bool>
+    <color name="flowers_col_01">#ffdc00</color>
+    <color name="flowers_col_02">#ef6fdd</color>
+    <color name="flowers_col_03">#ffce33</color>
+    <color name="flowers_col_04">#ffa5b3</color>
+    <color name="flowers_col_05">#629fff</color>
+    <color name="flowers_col_06">#634ecc</color>
+    <color name="flowers_col_07">#64a56c</color>
+    <color name="flowers_col_08">#f0cc00</color>
+    <color name="flowers_col_09">#e84b4b</color>
+    <color name="flowers_col_10">#cd763e</color>
+    <color name="flowers_col_11">#f0dd00</color>
+    <color name="flowers_col_12">#65ace3</color>
+</resources>

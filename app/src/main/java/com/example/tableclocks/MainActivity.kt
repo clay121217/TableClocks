@@ -2,7 +2,6 @@ package com.example.tableclocks
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -20,7 +19,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.example.tableclocks.databinding.ActivityMainBinding
-import kotlinx.coroutines.delay
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -44,21 +42,22 @@ class MainActivity : AppCompatActivity() {
         //設定画面ボタン
         val settingsBtn = binding.settingsBtn
         settingsBtn.setOnClickListener(View.OnClickListener {
-            val intent = Intent(application, SettingsActivity::class.java)
+            val intent = Intent(application, ThemeGalleryActivity::class.java)
             startActivity(intent)
         })
         binding.settingsBtn.setImageResource(R.drawable.baseline_settings_24)
 
 
         //開発者モード
-        getSharedPreferences("clock_settings", Context.MODE_PRIVATE).edit().apply {
-            putBoolean("DEV_MODE", true)
-            apply()
+        if("debug" == BuildConfig.BUILD_TYPE ){
+            themeTestButton()
         }
-        themeTestButton()
-
     }
 
+
+    //todo:時計の位置について、再考したい
+    //todo:もうすこし大きくしたいので、秒を下に置けるように
+    //todo:最大幅を決めて自動伸縮できるようにしたいけど。。。
     private fun clockSizeSet(){
         /* 時計を適切なサイズにセットする */
         val n = binding.clocksContent.width *0.4
@@ -91,6 +90,7 @@ class MainActivity : AppCompatActivity() {
             binding.textviewTimes.text = s[1]
             binding.textViewSec.text = s[2]
 
+
         }
     }
     //時計ここまで
@@ -100,26 +100,28 @@ class MainActivity : AppCompatActivity() {
     private fun themeImageSet(month:String){
         //設定読み込み
         val pref = getSharedPreferences("com.TableClocks.settings",Context.MODE_PRIVATE)
-        val themeName = pref.getString("themeName","jpseasons")
+        val themeName = pref.getString("themeName","flowers")//第二引数が初期値
 
         //データ整形 jpseasons_m_01のようにする
         val mainImgName = themeName+"_m_"+month.padStart(2,'0')
-        val mainBGColor = themeName+"_col_"+month.padStart(2,'0')
-
-        val drawableBG = ResourcesCompat.getDrawable(resources , R.drawable.mbg_simple , null )
+        val mainImgBGColor = themeName+"_col_"+month.padStart(2,'0')
+        val coverImgName = themeName+"_cover"
 
         //メインイメージセット
         binding.mainOverImage.setImageResource(resources.getIdentifier(mainImgName, "drawable", packageName))        //getIdentifierを使う方法、Stringが使えるので引き出しやすそう
         //背景色セット
-        binding.mainBG.setBackgroundColor(ContextCompat.getColor(this, resources.getIdentifier(mainBGColor, "color", packageName)))//◀半分 キーカラー
+        binding.mainBG.setBackgroundColor(ContextCompat.getColor(this, resources.getIdentifier(mainImgBGColor, "color", packageName)))//◀半分 キーカラー
         //カバー画像セット
-        binding.mainImageCover.setImageDrawable(drawableBG)
+        binding.mainImageCover.setImageDrawable(ResourcesCompat.getDrawable(resources , resources.getIdentifier(coverImgName, "drawable", packageName) , null ))
 
 
     }
 
     //時計・テーマのフェードイン
     //フェードインは、背景色がついてメイン画像が外から入ってくる
+    //todo:フェードインの前、おそらく画像を差し替えたタイミングでAlphaがデフォルト値？にもどってしまう
+    //todo:ここで解決するより、ThemeDrawingFragmentで実装しなおすときに解決したい、隠す用の黒いフレームを挟むか、フラグメントごとフェードするでもいいかも
+    //todo:プレビュー画面でカバーがフェード前後に変わる可能性があるので、カバーも隠したい
     private fun fadInMain(){
         // アルファ値を1.0fから0.0fへ変化させるフェードアウトアニメーション
         val fadeAnim = AlphaAnimation(0.0f, 1.0f)
@@ -130,6 +132,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.mainOverImage.animation = fadeAnim
         binding.mainBG.animation = fadeAnim
+
     }
 
     //時計・テーマの切り替えフェードアウト
@@ -150,33 +153,33 @@ class MainActivity : AppCompatActivity() {
     //テスト用ボタン
     //月を切り替えられるように
     private fun themeTestButton(){
-        val pref = getSharedPreferences("clock_settings",Context.MODE_PRIVATE)
-        if(pref.getBoolean("DEV_MODE",false)){
-            //ボタン実装
-            val themeTestButton = Button(this)
-            themeTestButton.text = "次の月へ"
-            themeTestButton.layoutParams = ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT)
+        //ボタン実装
+        val themeTestButton = Button(this)
+        themeTestButton.text = "表示テスト"
+        themeTestButton.layoutParams = ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT)
 
-            val linearLayout = findViewById<ConstraintLayout>(R.id.wrap)
-            linearLayout.addView(themeTestButton)
+        val linearLayout = findViewById<ConstraintLayout>(R.id.wrap)
+        linearLayout.addView(themeTestButton)
 
-            var month = 1
-            //リスナー
-            themeTestButton.setOnClickListener {
-                fadOutMain()
-                var monthStr = month.toString().padStart(2,'0')
-                _handler?.postDelayed( {
-                    themeImageSet(monthStr)
-                    fadInMain()
-                }, 900)
+        var month = 1
+        //リスナー
+        themeTestButton.setOnClickListener {
+            fadOutMain()
+            var monthStr = month.toString().padStart(2,'0')
+            _handler?.postDelayed( {
+                themeImageSet(monthStr)
+                fadInMain()
+            }, 900)
 
-                Toast.makeText(this, "変更しました$month", Toast.LENGTH_SHORT).show()
-                if(month < 12){
-                    month += 1
-                }else{
-                    month = 1
-                }
+            themeTestButton.text = month.toString()+"月"
+
+            Toast.makeText(this, "変更しました$month", Toast.LENGTH_SHORT).show()
+            if(month < 12){
+                month += 1
+            }else{
+                month = 1
             }
+
         }
     }
 

@@ -1,25 +1,35 @@
 package com.example.tableclocks
 
+import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import com.example.tableclocks.databinding.FragmentThemeGalleryBinding
 
 import com.example.tableclocks.placeholder.PlaceholderContent.PlaceholderItem
-import com.example.tableclocks.databinding.FragmentThemeSettingsBinding
+
 
 /**
  * [RecyclerView.Adapter] that can display a [PlaceholderItem].
  * TODO: Replace the implementation with code for your data type.
  */
+/*
+* todo:GPTに中身の実装アイデア聞いたのでそれ参照
+* アイテムがクリックされたらpositionとクリックイベントを親アクティビティ(ここではtaheme)知らせる方法
+*
+*
+ */
 class MyItemRecyclerViewAdapter(
-    private val values: List<PlaceholderItem>
+    private val values: Array<String>,
+    private val context: Context
 ) : RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         return ViewHolder(
-            FragmentThemeSettingsBinding.inflate(
+            FragmentThemeGalleryBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -29,21 +39,21 @@ class MyItemRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = values[position]
-        holder.idView.text = item.id
-        holder.contentView.text = item.content
+        //リスト用画像
+        holder.galleryItemBGView.setImageResource(
+            context.resources.getIdentifier(values[position]+"_li", "drawable", context.packageName)
+        )
+        //タイトルセット
+        holder.themeNameView.text = context.getString( context.resources.getIdentifier(values[position]+"_themeName_jp", "string", context.packageName) )
     }
 
     override fun getItemCount(): Int = values.size
 
-    inner class ViewHolder(binding: FragmentThemeSettingsBinding) :
+    inner class ViewHolder(binding: FragmentThemeGalleryBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        val idView: TextView = binding.itemNumber
-        val contentView: TextView = binding.content
-
-        override fun toString(): String {
-            return super.toString() + " '" + contentView.text + "'"
-        }
+        val galleryItemBGView: ImageView = binding.galleryItemBG
+        val themeNameView: TextView = binding.themeName
+        val subThemeNameView: TextView = binding.subThemeName
     }
 
 }

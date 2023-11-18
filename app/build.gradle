@@ -4,6 +4,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        release {
+        storeFile file('C:\\Users\\daisu\\Documents\\APP開発\\keystore\\keystore001.jks')
+            storePassword 'Ns5Xhari'
+            keyPassword 'vW6g8csN'
+            keyAlias 'key001'
+        }
+    }
     namespace 'com.example.tableclocks'
     compileSdk 33
 
@@ -21,6 +29,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            versionNameSuffix '-d'
+            applicationIdSuffix '.d'
         }
     }
     compileOptions {
@@ -33,7 +46,22 @@ android {
 
     buildFeatures{
         viewBinding = true
+        buildConfig = true
     }
+    flavorDimensions 'plan'
+    productFlavors {
+        free {
+            dimension 'plan'
+            applicationIdSuffix '.free'
+            versionNameSuffix '-free'
+        }
+        paid {
+            dimension 'plan'
+            applicationIdSuffix '.paid'
+            versionNameSuffix '-paid'
+        }
+    }
+
 }
 
 dependencies {
@@ -46,6 +74,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.3.0'
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.preference:preference:1.2.0'
+//    implementation 'androidx.core:core-ktx:+'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
