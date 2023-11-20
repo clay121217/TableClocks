@@ -54,13 +54,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-    //todo:時計の位置について、再考したい
-    //todo:もうすこし大きくしたいので、秒を下に置けるように
-    //todo:最大幅を決めて自動伸縮できるようにしたいけど。。。
     private fun clockSizeSet(){
         /* 時計を適切なサイズにセットする */
-        val n = binding.clocksContent.width *0.4
+        val n = binding.clocksContent.width *0.45
         binding.textviewTimes.width = n.toInt()
         binding.textviewTimes.setTextSize(TypedValue.COMPLEX_UNIT_PX,(n/2).toFloat())
         binding.textViewSec.width = (n/2).toInt()
@@ -90,7 +86,8 @@ class MainActivity : AppCompatActivity() {
             binding.textviewTimes.text = s[1]
             binding.textViewSec.text = s[2]
 
-
+//            todo:時計のフォントが一部端末で上手くセットされてない？
+//            todo: Pixel5 API23でうまくいかなかった
         }
     }
     //時計ここまで

@@ -6,8 +6,12 @@
     android:name="com.example.tableclocks.ThemeSettingsFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="end"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
+    android:scrollbarStyle="insideInset"
+    android:scrollbars="vertical"
+    android:verticalScrollbarPosition="left"
     app:layoutManager="LinearLayoutManager"
     tools:context=".ThemeGalleryFragment"
     tools:listitem="@layout/fragment_theme_gallery" />

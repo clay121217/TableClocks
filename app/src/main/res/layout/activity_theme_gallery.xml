@@ -4,6 +4,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#D3D3D3"
     android:clipToPadding="false">
 
     <TextView
@@ -14,7 +15,7 @@
         android:elevation="4dp"
         android:fontFamily="@font/rounded_mplus_1c_bold"
         android:padding="10dp"
-        android:text="@string/settings_title"
+        android:text="@string/themes_gallery_title"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"

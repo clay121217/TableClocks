@@ -16,7 +16,6 @@
     <string name="attachment_summary_on" translatable="false">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off" translatable="false">Only download attachments when manually requested</string>
-    <string name="settings_title">themes</string>
     <string name="preview_image_description" translatable="false">preview image</string>
     <string name="back_button_description">back</string>
     <string name="main_over_img_description" translatable="false">main img</string>
@@ -27,5 +26,6 @@
     <string name="settings_button">settings</string>
     <string name="preview_text">Sample</string>
     <string name="themeImage" translatable="false">themeImage</string>
+    <string name="themes_gallery_title">Themes</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

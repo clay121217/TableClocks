@@ -55,7 +55,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clocksContent"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:gravity="center_vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,7 +73,7 @@
             android:text="@string/days_filler"
             android:textColor="@color/white"
             android:textSize="30dp"
-            android:translationY="35dp"
+            android:translationY="16dp"
             app:layout_constraintBottom_toTopOf="@+id/textviewTimes"
             app:layout_constraintStart_toStartOf="@+id/textviewTimes"
             tools:ignore="SpUsage" />
@@ -83,18 +84,15 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:fontFamily="@font/rounded_mplus_1c_bold"
-            android:includeFontPadding="false"
             android:singleLine="true"
             android:text="@string/times_filler"
             android:textColor="@color/white"
             android:textSize="80dp"
-            android:translationY="20dp"
-            app:autoSizeMaxTextSize="180dp"
+            app:autoSizeMaxTextSize="300dp"
             app:autoSizeMinTextSize="30dp"
             app:autoSizeTextType="none"
             app:layout_constraintBottom_toTopOf="@+id/guideline"
             app:layout_constraintDimensionRatio="2.2:1"
-            app:layout_constraintEnd_toStartOf="@+id/guideline5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline"
             tools:ignore="SpUsage" />
@@ -103,14 +101,14 @@
             android:id="@+id/textViewSec"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:fontFamily="@font/rounded_mplus_1c_bold"
             android:includeFontPadding="false"
             android:text="@string/sec_filler"
             android:textColor="@color/white"
             android:textSize="34dp"
-            android:translationY="20dp"
             app:layout_constraintBaseline_toBaselineOf="@+id/textviewTimes"
+            app:layout_constraintEnd_toStartOf="@+id/guideline5"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/textviewTimes"
             tools:ignore="SpUsage" />
 
@@ -119,7 +117,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.75" />
+            app:layout_constraintGuide_percent="0.90" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
