@@ -29,7 +29,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/themeSettingsTitle">
+        app:layout_constraintTop_toBottomOf="@+id/themeSettingsTitle"
+        >
 
     </FrameLayout>
 
@@ -58,18 +59,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <View
-                android:id="@+id/previewBG"
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/themeFragmentContainer"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:background="#DC9FA8"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5" />
-
+                tools:layout="@layout/fragment_theme_drawing" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline4"
@@ -78,40 +76,6 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.5" />
 
-            <ImageView
-                android:id="@+id/previewOverImage"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:alpha="0.9"
-                android:clickable="false"
-                android:contentDescription="@string/main_over_img_description"
-                android:scaleType="fitStart"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="1:0.90"
-                app:layout_constraintEnd_toStartOf="@+id/guideline4"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/jpseasons_m_04"
-                tools:srcCompat="@drawable/jpseasons_m_04" />
-
-            <ImageView
-                android:id="@+id/previewImageCover"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:alpha="@dimen/imageCoverAlpha"
-                android:background="#00DC9FA8"
-                android:contentDescription="@string/main_image_cover_description"
-                android:elevation="0dp"
-                android:scaleType="fitXY"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0"
-                app:srcCompat="@drawable/cover_slash"
-                tools:srcCompat="@drawable/cover_slash" />
-
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="0dp"
@@ -119,9 +83,8 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
                 android:fontFamily="@font/rounded_mplus_1c_bold"
-                android:gravity="center|right"
+                android:gravity="center|end"
                 android:lines="1"
-                android:text="日本の季節感"
                 android:textColor="@color/white"
                 app:autoSizeMaxTextSize="60dp"
                 app:autoSizeTextType="uniform"

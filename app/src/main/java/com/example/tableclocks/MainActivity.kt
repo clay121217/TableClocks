@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        //todo 設定を取得できるようにしたい
         //フラグメントの生成
         val fragment = ThemeDrawingFragment.newInstance("jpseasons", 2)
         val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()

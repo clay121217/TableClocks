@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
-import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentTransaction
 import androidx.preference.PreferenceFragmentCompat
 import com.example.tableclocks.databinding.ActivityThemeGalleryBinding
 
@@ -33,7 +33,15 @@ class ThemeGalleryActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        //リストで所持テーマのライブラリと、購入誘導をやりたい
+
+        //設定取得
+
+        //フラグメントの生成
+        //todo 設定を取得できるようにしたい、フィーチャー月を取ってくるのもやる
+        val fragment = ThemeDrawingFragment.newInstance("jpseasons", 2)
+        val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
+        transaction.add(R.id.themeFragmentContainer, fragment)
+        transaction.commit()
 
     }
 
@@ -45,6 +53,9 @@ class ThemeGalleryActivity : AppCompatActivity() {
 
 //    val pref = getSharedPreferences("com.TableClocks.settings", Context.MODE_PRIVATE)
 //    val themeName = pref.getString("themeName","jpseasons")
+
+    //todo リストのクリックに反応してプレビューを変更したい
+    //todo 数秒ごと？にランダムで月変更？とにかく複数月を見られるように
 
 
     @Suppress("DEPRECATION")
