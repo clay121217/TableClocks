@@ -11,13 +11,14 @@
         android:id="@+id/drawThemeBGColor"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#DC9FA8"
+        android:background="#333333"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintVertical_bias="0.5"
+        tools:background="#DC9FA8"/>
 
     <ImageView
         android:id="@+id/drawThemeImage"
@@ -25,11 +26,11 @@
         android:layout_height="0dp"
         android:clickable="false"
         android:contentDescription="@string/themeImage"
-        android:src="@drawable/jpseasons_m_04"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:0.90"
         app:layout_constraintEnd_toStartOf="@+id/guideline8"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:src="@drawable/jpseasons_m_04"/>
 
     <ImageView
         android:id="@+id/drawThemeCover"
@@ -44,8 +45,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/cover_slash"
-        tools:srcCompat="@drawable/cover_slash" />
+        tools:src="@drawable/cover_slash"/>
+
+    <View
+        android:id="@+id/overBlack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:alpha="0"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline8"

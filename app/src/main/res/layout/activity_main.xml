@@ -8,49 +8,15 @@
     android:background="#333333"
     tools:context=".MainActivity">
 
-    <View
-        android:id="@+id/mainBG"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/themeFragmentContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#DC9FA8"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
-
-    <ImageView
-        android:id="@+id/mainOverImage"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:alpha="0.9"
-        android:clickable="false"
-        android:contentDescription="@string/main_over_img_description"
-        android:scaleType="fitStart"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="1:0.90"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/jpseasons_m_04"
-        tools:srcCompat="@drawable/jpseasons_m_04" />
-
-    <ImageView
-        android:id="@+id/mainImageCover"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:alpha="@dimen/imageCoverAlpha"
-        android:background="#00DC9FA8"
-        android:contentDescription="@string/main_image_cover_description"
-        android:elevation="0dp"
-        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/cover_slash"
-        tools:srcCompat="@drawable/cover_slash" />
+        tools:layout="@layout/fragment_theme_drawing" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clocksContent"

@@ -1,15 +1,21 @@
 package com.example.tableclocks
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import com.example.tableclocks.databinding.FragmentThemeDrawingBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val THEME_NAME = "theme_name"
+private const val MONTH = "month"
 
 /**
  * A simple [Fragment] subclass.
@@ -26,25 +32,55 @@ private const val ARG_PARAM2 = "param2"
 class ThemeDrawingFragment : Fragment() {
     //引数的なものでDrawingDataをとりたい
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var themeName: String? = null
+    private var month: Int? = null
+
+    private var _binding: FragmentThemeDrawingBinding? = null
+    private val binding get() = _binding!!
+
+//    private var _handler = Looper.myLooper()?.let { Handler(it) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            themeName = it.getString(THEME_NAME)
+            month = it.getInt(MONTH)
         }
-
-//        描画メソッドを呼び出し
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_theme_drawing, container, false)
+        _binding = FragmentThemeDrawingBinding.inflate(inflater, container, false)
+        return binding.root
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+
+
+//        生成時テーマ描画
+
+        //設定読み込み　何らかの方法でPreferenceを取ってくる？これってActyvity側でやることかも
+//        val pref = getSharedPreferences("com.TableClocks.settings",Context.MODE_PRIVATE)
+//        themeName = pref.getString("themeName","flowers")//第二引数が初期値
+//        todo:デフォルトは設定から取ってきたいができるか不明
+
+        //        アニメーターのセット
+        val fadeAnimator = ObjectAnimator.ofFloat(binding.overBlack, View.ALPHA, 1f, 0f)
+        fadeAnimator.duration = 1500
+
+        //描画
+        themeImageSet(themeName ?: "jpseasons", month ?: 1)
+
+        //フェードイン
+        fadeAnimator.start()
+
+
     }
 
 //    DrawingDataを引数に描画をする
@@ -54,18 +90,90 @@ class ThemeDrawingFragment : Fragment() {
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
+         * @param themeName Parameter 1.
+         * @param month Parameter 2.
          * @return A new instance of fragment ThemeDrawingFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(themeName: String, month: Int) =
             ThemeDrawingFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putString(THEME_NAME, themeName)
+                    putInt(MONTH, month)
                 }
             }
     }
+
+    //テーマ画像セット
+    //生で呼び出すのは生成時だけの予定
+    //他の場合はフェードをつけたthemeImageChange()で対応したい
+    private fun themeImageSet(newThemeName: String = "keep", newMonth: Int = -1) {
+
+        //引数があるときはメンバ変数を置き換える
+        if (newThemeName !== "keep") {
+            themeName = newThemeName
+        }
+        if (newMonth != -1) {
+            month = newMonth
+        }
+
+        //データ整形 jpseasons_m_01のようにする
+        val mainImgName = themeName + "_m_" + month.toString().padStart(2, '0')
+        val mainImgBGColor = themeName + "_col_" + month.toString().padStart(2, '0')
+        val coverImgName = themeName + "_cover"
+
+        //メインイメージセット
+        binding.drawThemeImage.setImageResource(
+            resources.getIdentifier(
+                mainImgName,
+                "drawable",
+                requireContext().packageName
+            )
+        )        //getIdentifierを使う方法、Stringが使えるので引き出しやすそう
+
+        //背景色セット
+        binding.drawThemeBGColor.setBackgroundColor(
+            ContextCompat.getColor(
+                requireContext(),
+                resources.getIdentifier(mainImgBGColor, "color", context?.packageName)
+            )
+        )
+
+        //カバー画像セット　テーマ引数があるときだけ
+        if(newThemeName !== "keep"){
+            binding.drawThemeCover.setImageDrawable(
+                ResourcesCompat.getDrawable(
+                    resources,
+                    resources.getIdentifier(coverImgName, "drawable", context?.packageName),
+                    null
+                )
+            )
+        }
+    }
+
+    //テーマや月の変更、フェード付き
+    fun themeImageChange(newThemeName: String = "keep", newMonth: Int = -1){
+        //アニメーションセット
+        val fadeAnimator = ObjectAnimator.ofFloat(binding.overBlack, View.ALPHA, 1f, 0f)
+        fadeAnimator.duration = 800
+
+        //変更開始
+        fadeAnimator.reverse()      //フェードアウト
+
+        Handler(Looper.getMainLooper()).postDelayed( {    //遅延実行
+            themeImageSet(newThemeName, newMonth) //画像セット
+            fadeAnimator.start()    //フェードイン
+        }, 1200)
+
+    }
+
+    override fun onDestroyView() {
+
+        super.onDestroyView()
+        _binding = null //ビューバインディングをちゃんと破棄する
+
+    }
+
+
 }

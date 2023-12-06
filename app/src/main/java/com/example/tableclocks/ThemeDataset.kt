@@ -61,7 +61,6 @@ fun generateDrawingData(context: Context,themeId:String, month:Int):DrawingData{
     //入力を整理
     val monthStr = month.toString().padStart(2,'0')
 
-
     //DrawingDataを構築して返す
     return DrawingData(
         //カラー
