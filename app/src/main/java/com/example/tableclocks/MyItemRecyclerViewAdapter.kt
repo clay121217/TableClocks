@@ -17,13 +17,14 @@ import com.example.tableclocks.placeholder.PlaceholderContent.PlaceholderItem
  */
 /*
 * todo:GPTに中身の実装アイデア聞いたのでそれ参照
-* アイテムがクリックされたらpositionとクリックイベントを親アクティビティ(ここではtaheme)知らせる方法
+* アイテムがクリックされたらpositionとクリックイベントを親アクティビティ(ここではtheme)知らせる方法
 *
 *
  */
 class MyItemRecyclerViewAdapter(
     private val values: Array<String>,
-    private val context: Context
+    private val context: Context,
+    private val itemClickListener: OnGalleryItemClickListener
 ) : RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -41,11 +42,35 @@ class MyItemRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         //リスト用画像
         holder.galleryItemBGView.setImageResource(
-            context.resources.getIdentifier(values[position]+"_li", "drawable", context.packageName)
+            context.resources.getIdentifier(
+                values[position] + "_li",
+                "drawable",
+                context.packageName
+            )
         )
         //タイトルセット
-        holder.themeNameView.text = context.getString( context.resources.getIdentifier(values[position]+"_themeName_jp", "string", context.packageName) )
+        holder.themeNameView.text = context.getString(
+            context.resources.getIdentifier(
+                values[position] + "_themeName_jp",
+                "string",
+                context.packageName
+            )
+        )
+        holder.subThemeNameView.text = context.getString(
+            context.resources.getIdentifier(
+                values[position] + "_themeName_en",
+                "string",
+                context.packageName
+            )
+        )
+
+        //クリックリスナー
+        holder.galleryItemBGView.setOnClickListener {
+            // アイテムがクリックされたときに、クリックイベントをアクティビティに通知
+            itemClickListener.onItemClick(values[position])
+        }
     }
+
 
     override fun getItemCount(): Int = values.size
 

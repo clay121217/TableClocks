@@ -1,5 +1,6 @@
 package com.example.tableclocks
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -10,12 +11,26 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.tableclocks.placeholder.PlaceholderContent
 
+
 /**
  * A fragment representing a list of Items.
  */
 class ThemeGalleryFragment : Fragment() {
 
     private var columnCount = 1
+    private var listener: OnGalleryItemClickListener? = null
+
+    override fun onAttach(context: Context) {
+
+        //親アクティビティのContextをチェック、OnGalleryItemClickListenerインターフェイスを実装していればキャストしてlistenerに代入
+        super.onAttach(context)
+        if (context is OnGalleryItemClickListener) {
+            listener = context
+        } else {
+            throw RuntimeException("$context must implement FragmentListener")
+        }
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,15 +54,8 @@ class ThemeGalleryFragment : Fragment() {
                     else -> GridLayoutManager(context, columnCount)
                 }
 
-                /*
-                * todo:プレースホルダーを別データにする
-                * ThemeDatasetクラスのリストにできたら話がはやい
-                * フィーチャー月のデータをデフォルトでセットするように生成したい
-                * →おそらく、Adapter内にFragmentを入れ込むのが厳しいので２カラムでプレビュー/メニューにしたほうがいい（現状のやつ）
-                * →list用の小窓画像を直で貼ってもいいかなあ
-                 */
-                var themeNameList:Array<String> = getResources().getStringArray(R.array.theme_id_arr)
-                adapter = MyItemRecyclerViewAdapter(themeNameList,context)
+                val themeNameList: Array<String> = resources.getStringArray(R.array.theme_id_arr)
+                adapter = MyItemRecyclerViewAdapter(themeNameList, context, listener!!)
             }
         }
         return view

@@ -5,4 +5,6 @@
     <string name="settings_button">設定</string>
     <string name="preview_text">サンプル</string>
     <string name="themes_gallery_title">テーマ</string>
+    <string name="themeSettingBtn">決定</string>
+    <string name="themeSetBtn">テーマ決定</string>
 </resources>

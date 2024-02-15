@@ -17,7 +17,8 @@
     <string name="jpseasons_themeName_en" translatable="false">JP Seasons</string>
     <drawable name="jpseasons_cover">@drawable/cover_slash</drawable>
     <string name="jpseasons_mode" translatable="false">DEFAULT_MODE</string>
-    <bool name="jpseasons_charge">false</bool>
+    <bool name="jpseasons_is_free">true</bool>
+    <integer name="jpseasons_feature">4</integer>
     <color name="jpseasons_col_01">#f78b1e</color>
     <color name="jpseasons_col_02">#aa7c21</color>
     <color name="jpseasons_col_03">#edc52e</color>
@@ -36,7 +37,8 @@
     <string name="flowers_themeName_en" translatable="false">Flowers</string>
     <drawable name="flowers_cover">@drawable/cover_circle</drawable>
     <string name="flowers_mode" translatable="false">DEFAULT_MODE</string>
-    <bool name="flowers_charge">false</bool>
+    <bool name="flowers_is_free">false</bool>
+    <integer name="flowers_feature">5</integer>
     <color name="flowers_col_01">#ffdc00</color>
     <color name="flowers_col_02">#ef6fdd</color>
     <color name="flowers_col_03">#ffce33</color>

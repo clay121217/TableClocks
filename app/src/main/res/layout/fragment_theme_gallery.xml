@@ -31,14 +31,14 @@
             app:layout_constraintVertical_bias="0.5"
             app:srcCompat="@drawable/jpseasons_li" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/themeName"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="@dimen/gallery_cardtext_marginright"
             android:clickable="false"
-            android:fontFamily="@font/rounded_mplus_1c_medium"
+            app:fontFamily="@font/rounded_mplus_1c_medium"
             android:gravity="bottom|end"
             android:maxLines="1"
             android:text="@string/jpseasons_themeName_jp"
@@ -52,14 +52,14 @@
             app:layout_constraintStart_toStartOf="@+id/guideline6"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/subThemeName"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="@dimen/gallery_cardtext_marginright"
             android:layout_marginBottom="12dp"
             android:clickable="false"
-            android:fontFamily="@font/rounded_mplus_1c_medium"
+            app:fontFamily="@font/rounded_mplus_1c_medium"
             android:gravity="top|end"
             android:maxLines="1"
             android:text="@string/jpseasons_themeName_en"

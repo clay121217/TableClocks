@@ -1,6 +1,8 @@
 package com.example.tableclocks
 
+import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -16,10 +18,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.example.tableclocks.BuildConfig
 import com.example.tableclocks.databinding.ActivityMainBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
+//todo 設定用のActivityを作らないと？設定項目を考えないと・・・タイムゾーンとかお問い合わせとかバージョン情報とか
+//todo Amazonに出せるようにするかも？ビルドバリアント作るのかな
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -29,9 +34,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        //todo 設定を取得できるようにしたい
+        //設定の取得、正常/freeのチェック、じゃなければjpseasonsにもどす？
+        val sharedPreferences = getSharedPreferences("userSettings", Context.MODE_PRIVATE)
+        var userTheme = sharedPreferences.getString("userTheme", "jpseasons")!!
+
+        //テーマが有効かチェック
+        val isActive:Boolean = isActiveTheme(userTheme)
+        //無効なテーマならデフォルトテーマに書き換え
+        //todo 設定まで書き換えに行く？
+        if(!isActive){
+            userTheme = "jpseasons"
+        }
+
         //フラグメントの生成
-        val fragment = ThemeDrawingFragment.newInstance("jpseasons", 2)
+        val fragment = ThemeDrawingFragment.newInstance( userTheme ,2)
         val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
         transaction.add(R.id.themeFragmentContainer, fragment)
         transaction.commit()
@@ -46,6 +62,7 @@ class MainActivity : AppCompatActivity() {
         _handler?.post(_runnable)
 
         //設定画面ボタン
+        //todo 設定画面ができたら差し替え
         val settingsBtn = binding.settingsBtn
         settingsBtn.setOnClickListener {
             val intent = Intent(application, ThemeGalleryActivity::class.java)
@@ -53,6 +70,13 @@ class MainActivity : AppCompatActivity() {
         }
         binding.settingsBtn.setImageResource(R.drawable.baseline_settings_24)
 
+        //テーマギャラリーボタン
+        val themeGalleryBtn = binding.themeGalleryBtn
+        themeGalleryBtn.setOnClickListener {
+            val intent = Intent(application, ThemeGalleryActivity::class.java)
+            startActivity(intent)
+        }
+        binding.themeGalleryBtn.setImageResource(R.drawable.baseline_brush_24)
 
         //開発者モード
         if ("debug" == BuildConfig.BUILD_TYPE) {
@@ -68,6 +92,7 @@ class MainActivity : AppCompatActivity() {
         binding.textViewSec.width = (n / 2).toInt()
         binding.textViewSec.setTextSize(TypedValue.COMPLEX_UNIT_PX, (n / 4).toFloat())
         binding.textViewDays.setTextSize(TypedValue.COMPLEX_UNIT_PX, (n / 5).toFloat())
+
     }
 
     //    日付のセット
@@ -99,6 +124,32 @@ class MainActivity : AppCompatActivity() {
     }
     //時計ここまで
 
+    //テーマの有効化チェック
+    private fun isActiveTheme(themeName:String):Boolean{
+        //有料・無料チェック
+        if ("paid" == BuildConfig.FLAVOR) {
+            //有料版は素通り
+            return true
+        }else{
+//            //無料版は[theme]_is_freeを取得する
+            try {
+                // リソースIDを取得
+                val resourceId = resources.getIdentifier(themeName + "_is_free", "bool", packageName)
+
+                // リソースが存在し、かつそのリソースが `true` であれば有効
+                return if (resourceId != 0) {
+                    resources.getBoolean(resourceId)
+                } else {
+                    // リソースが見つからない場合も false として扱う
+                    false
+                }
+            } catch (e: Resources.NotFoundException) {
+                // リソースが見つからない場合も false として扱う
+                return false
+            }
+        }
+    }
+
     //テスト用ボタン
     //月を切り替えられるように
     private fun themeTestButton() {
@@ -119,7 +170,8 @@ class MainActivity : AppCompatActivity() {
         //リスナー
         themeTestButton.setOnClickListener {
             //Fragmentを保持
-            val fragmentHolder : Fragment? = supportFragmentManager.findFragmentById(R.id.themeFragmentContainer)
+            val fragmentHolder: Fragment? =
+                supportFragmentManager.findFragmentById(R.id.themeFragmentContainer)
             if (fragmentHolder != null && fragmentHolder is ThemeDrawingFragment) {
                 //月変更実行
                 fragmentHolder.themeImageChange(newMonth = month)

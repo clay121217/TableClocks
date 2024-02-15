@@ -12,26 +12,13 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.example.tableclocks.databinding.FragmentThemeDrawingBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+//augments
 private const val THEME_NAME = "theme_name"
 private const val MONTH = "month"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ThemeDrawingFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-
-/*
- *  TODO:なんらかの引数としてDrawingDataを受け取って描画
- *  RecyclarViewAdapterから呼び出されたlistitemのフラグメントからでも受け取れる方法
- *
- */
 
 class ThemeDrawingFragment : Fragment() {
     //引数的なものでDrawingDataをとりたい
-    // TODO: Rename and change types of parameters
     private var themeName: String? = null
     private var month: Int? = null
 
@@ -61,18 +48,11 @@ class ThemeDrawingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-
-
 //        生成時テーマ描画
 
-        //設定読み込み　何らかの方法でPreferenceを取ってくる？これってActyvity側でやることかも
-//        val pref = getSharedPreferences("com.TableClocks.settings",Context.MODE_PRIVATE)
-//        themeName = pref.getString("themeName","flowers")//第二引数が初期値
-//        todo:デフォルトは設定から取ってきたいができるか不明
-
-        //        アニメーターのセット
+        //アニメーターのセット
         val fadeAnimator = ObjectAnimator.ofFloat(binding.overBlack, View.ALPHA, 1f, 0f)
-        fadeAnimator.duration = 1500
+        fadeAnimator.duration = 700
 
         //描画
         themeImageSet(themeName ?: "jpseasons", month ?: 1)
@@ -94,7 +74,6 @@ class ThemeDrawingFragment : Fragment() {
          * @param month Parameter 2.
          * @return A new instance of fragment ThemeDrawingFragment.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(themeName: String, month: Int) =
             ThemeDrawingFragment().apply {
@@ -141,7 +120,7 @@ class ThemeDrawingFragment : Fragment() {
         )
 
         //カバー画像セット　テーマ引数があるときだけ
-        if(newThemeName !== "keep"){
+        if (newThemeName !== "keep") {
             binding.drawThemeCover.setImageDrawable(
                 ResourcesCompat.getDrawable(
                     resources,
@@ -153,18 +132,18 @@ class ThemeDrawingFragment : Fragment() {
     }
 
     //テーマや月の変更、フェード付き
-    fun themeImageChange(newThemeName: String = "keep", newMonth: Int = -1){
+    fun themeImageChange(newThemeName: String = "keep", newMonth: Int = -1) {
         //アニメーションセット
         val fadeAnimator = ObjectAnimator.ofFloat(binding.overBlack, View.ALPHA, 1f, 0f)
-        fadeAnimator.duration = 800
+        fadeAnimator.duration = 400
 
         //変更開始
         fadeAnimator.reverse()      //フェードアウト
 
-        Handler(Looper.getMainLooper()).postDelayed( {    //遅延実行
+        Handler(Looper.getMainLooper()).postDelayed({    //遅延実行
             themeImageSet(newThemeName, newMonth) //画像セット
             fadeAnimator.start()    //フェードイン
-        }, 1200)
+        }, 600)
 
     }
 
