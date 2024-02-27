@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#D3D3D3"
-    android:clipToPadding="false">
+    android:clipToPadding="false"
+    android:keepScreenOn="true">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/themeSettingsTitle"
@@ -56,9 +57,9 @@
             android:id="@+id/previewCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
             app:cardCornerRadius="20dp"
             app:cardElevation="6dp">
 
@@ -159,13 +160,16 @@
                 android:id="@+id/themeSetBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/jpseasons_col_01"
+                android:backgroundTint="#3F51B5"
                 android:fontFamily="@font/rounded_mplus_1c_bold"
-                android:paddingLeft="8dp"
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
                 android:text="@string/themeSetBtn"
                 android:textAllCaps="false"
+                android:textSize="16sp"
                 android:typeface="sans"
-                app:cornerRadius="20dp"
+                app:cornerRadius="40dp"
                 app:icon="@drawable/baseline_brush_24"
                 app:iconPadding="4dp" />
         </LinearLayout>

@@ -47,7 +47,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         //フラグメントの生成
-        val fragment = ThemeDrawingFragment.newInstance( userTheme ,2)
+        val calendar = Calendar.getInstance()        //月取得
+        val month = calendar.get(Calendar.MONTH) + 1 //0オリジンなため+1
+
+        val fragment = ThemeDrawingFragment.newInstance( userTheme , month)
         val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
         transaction.add(R.id.themeFragmentContainer, fragment)
         transaction.commit()
@@ -117,9 +120,6 @@ class MainActivity : AppCompatActivity() {
             binding.textViewDays.text = s[0]
             binding.textviewTimes.text = s[1]
             binding.textViewSec.text = s[2]
-
-//            todo:時計のフォントが一部端末で上手くセットされてない？
-//            todo: Pixel5 API23でうまくいかなかった
         }
     }
     //時計ここまで
@@ -196,6 +196,22 @@ class MainActivity : AppCompatActivity() {
     @Suppress("DEPRECATION")
     override fun onResume() {
         super.onResume()
+
+        //設定再確認
+        val sharedPreferences = getSharedPreferences("userSettings", Context.MODE_PRIVATE)
+        var userTheme = sharedPreferences.getString("userTheme", "jpseasons")!!
+
+        //テーマ設定を反映
+        //Fragmentを保持
+        val fragmentHolder: Fragment? =
+            supportFragmentManager.findFragmentById(R.id.themeFragmentContainer)
+        if (fragmentHolder != null && fragmentHolder is ThemeDrawingFragment) {
+            val calendar = Calendar.getInstance()        //月取得
+            val month = calendar.get(Calendar.MONTH) + 1 //0オリジンなため+1
+
+            //テーマ変更実行
+            fragmentHolder.themeImageChange( userTheme , month )
+        }
 
         //ステータスバーとナビゲーションバー消す
         // API 30以上の場合

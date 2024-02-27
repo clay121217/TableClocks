@@ -52,7 +52,7 @@ class ThemeDrawingFragment : Fragment() {
 
         //アニメーターのセット
         val fadeAnimator = ObjectAnimator.ofFloat(binding.overBlack, View.ALPHA, 1f, 0f)
-        fadeAnimator.duration = 700
+        fadeAnimator.duration = 400
 
         //描画
         themeImageSet(themeName ?: "jpseasons", month ?: 1)

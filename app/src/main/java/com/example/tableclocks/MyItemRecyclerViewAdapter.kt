@@ -9,6 +9,7 @@ import android.widget.TextView
 import com.example.tableclocks.databinding.FragmentThemeGalleryBinding
 
 import com.example.tableclocks.placeholder.PlaceholderContent.PlaceholderItem
+import java.util.Locale
 
 
 /**
@@ -49,16 +50,29 @@ class MyItemRecyclerViewAdapter(
             )
         )
         //タイトルセット
+        //テーマ名を取得、日英で逆に
+        var locale = Locale.getDefault()
+        var lang = locale.language
+
+        var lang1 = ""
+        var lang2 = ""
+        if (lang == "ja"){
+            lang1 = "jp"
+            lang2 = "en"
+        }else{
+            lang1 = "en"
+            lang2 = "jp"
+        }
         holder.themeNameView.text = context.getString(
             context.resources.getIdentifier(
-                values[position] + "_themeName_jp",
+                values[position] + "_themeName_"+lang1,
                 "string",
                 context.packageName
             )
         )
         holder.subThemeNameView.text = context.getString(
             context.resources.getIdentifier(
-                values[position] + "_themeName_en",
+                values[position] + "_themeName_"+lang2,
                 "string",
                 context.packageName
             )

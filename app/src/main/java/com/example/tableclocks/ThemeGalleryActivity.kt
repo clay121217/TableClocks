@@ -1,9 +1,12 @@
 package com.example.tableclocks
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
@@ -14,23 +17,31 @@ import androidx.preference.PreferenceFragmentCompat
 import com.example.tableclocks.databinding.ActivityThemeGalleryBinding
 import java.util.Locale
 
-//todo: 設定変更ボタンを実装する
 //todo: プレビューを色々表示させる処理をつけるかどうか検討
 //todo: サンプルだとかプレビューの表示を整理する、表示いらないかも
 //todo: Freeとかそういうのも表示検討
+//todo: Sampleはプレビューカード内から追い出す？
+//todo: 現在のテーマを何処かでわかるように。画面の何処かに書いておくか、リストアイテムにマークするとか、選択ボタンがグレーアウトするとか
 
 class ThemeGalleryActivity : AppCompatActivity(), OnGalleryItemClickListener {
     private lateinit var binding: ActivityThemeGalleryBinding
 
-    private var userThemeName :String = "jpseasons" //ユーザーが設定しているテーマ
-    private var previewThemeName :String = "jpseasons" //プレビュー選択中のテーマ
+    var userThemeName :String = "jpseasons" //ユーザーが設定しているテーマ名のホルダー
+    var previewThemeName :String = "jpseasons" //プレビュー選択中のテーマ名のホルダー
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityThemeGalleryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //設定取得
+        val sharedPreferences = getSharedPreferences("userSettings", Context.MODE_PRIVATE)
+        val userTheme = sharedPreferences.getString("userTheme", "jpseasons")!!
+        userThemeName = userTheme //ついでにセット
+        previewThemeName = userTheme //初期化
+
         //ギャラリーリストのフラグメント生成
+        //todo 最初に表示されているテーマをjpsesonsにするのか設定中のテーマにするのか？
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
@@ -41,26 +52,20 @@ class ThemeGalleryActivity : AppCompatActivity(), OnGalleryItemClickListener {
 
         //戻るボタン
         binding.backButton.setOnClickListener {
-            val intent = Intent(application, MainActivity::class.java)
-            startActivity(intent)
+            onBackPressedDispatcher.onBackPressed()
         }
 
 
-        //設定取得
-        //todo 設定を取得できるようにしたい
-        val sharedPreferences = getSharedPreferences("userSettings", Context.MODE_PRIVATE)
-        val themeName = sharedPreferences.getString("userTheme", "jpseasons")!!
-        userThemeName = themeName //ついでにセット
 
         //テーマ名をプレビューにセット
-
+        setPreviewText()
 
         //プレビューフラグメントの生成
         val fragment = ThemeDrawingFragment.newInstance(
-            themeName,
+            userTheme,
             resources.getInteger(
                 resources.getIdentifier(
-                    themeName + "_feature",
+                    userTheme + "_feature",
                     "integer",
                     packageName
                 )
@@ -70,17 +75,63 @@ class ThemeGalleryActivity : AppCompatActivity(), OnGalleryItemClickListener {
         transaction.add(R.id.themeFragmentContainer, fragment)
         transaction.commit()
 
+        //アニメーターのセット
+        val fadeAnimator = ObjectAnimator.ofFloat(binding.previewThemeName, View.ALPHA, 0f, 1f)
+        fadeAnimator.duration = 700
+        val fadeAnimator2 = ObjectAnimator.ofFloat(binding.previewSubThemeName, View.ALPHA, 0f, 1f)
+        fadeAnimator2.duration = 700
+
+        fadeAnimator.start()
+        fadeAnimator2.start()
+
+        //テーマセットボタン
+        binding.themeSetBtn.setOnClickListener {
+            sharedPreferences.edit().putString("userTheme",previewThemeName).apply()
+            onBackPressedDispatcher.onBackPressed()
+        }
+
     }
 
-    fun setPreviewText(themeName: String){
-        var locale = Locale.getDefault()
-        var lang = locale.getDisplayLanguage()
+    private fun setPreviewText(){
 
-        //テーマ名をプレビューにセット
-        binding.previewThemeName.text =
-            resources.getString(resources.getIdentifier(themeName+"_themeName_jp","string",packageName))
-        binding.previewSubThemeName.text =
-            resources.getString(resources.getIdentifier(themeName+"_themeName_en","string",packageName))
+
+        //アニメーターのセット
+        val fadeAnimator = ObjectAnimator.ofFloat(binding.previewThemeName, View.ALPHA, 0f, 1f)
+        fadeAnimator.duration = 400
+        val fadeAnimator2 = ObjectAnimator.ofFloat(binding.previewSubThemeName, View.ALPHA, 0f, 1f)
+        fadeAnimator2.duration = 400
+
+        //フェードアウト
+        fadeAnimator.reverse()
+        fadeAnimator2.reverse()
+
+        //テーマ名を取得、日英で逆に
+        var locale = Locale.getDefault()
+        var lang = locale.language
+
+        var lang1 = ""
+        var lang2 = ""
+        if (lang == "ja"){
+            lang1 = "jp"
+            lang2 = "en"
+        }else{
+            lang1 = "en"
+            lang2 = "jp"
+        }
+
+        val previewThemeName1 = resources.getString(resources.getIdentifier(previewThemeName+"_themeName_"+lang1,"string",packageName))
+        val previewThemeName2 = resources.getString(resources.getIdentifier(previewThemeName+"_themeName_"+lang2,"string",packageName))
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            //テーマ名をプレビューにセット
+            binding.previewThemeName.text = previewThemeName1
+            binding.previewSubThemeName.text = previewThemeName2
+
+            //フェードイン
+            fadeAnimator.start()
+            fadeAnimator2.start()
+        },600)
+
     }
 
     //RecyclerViewのアイテムがクリックされたときのコールバック
@@ -89,10 +140,9 @@ class ThemeGalleryActivity : AppCompatActivity(), OnGalleryItemClickListener {
         //連打防止
         if (!isDelayClickEvent()) return
 
-        //メンバ変数にセット
+        //選択テーマをtextViewとメンバ変数にセット
         previewThemeName = themeName
-
-        //todo: テーマをテーマ設定変更ボタンに渡す？ 押したときにpreviewThemeName参照するでも可、先にボタンを実装する
+        setPreviewText()
 
 
 
@@ -132,7 +182,7 @@ class ThemeGalleryActivity : AppCompatActivity(), OnGalleryItemClickListener {
 
 
     //連続でのイベント防止
-    private val DELAY: Long = 1000  // １秒未満のイベントは無視
+    private var DELAY: Long = 1000  // １秒未満のイベントは無視
     private var mOldTime: Long = 0  // 前回イベント実施時刻
 
     private fun isDelayClickEvent(): Boolean = isDelayClickEvent(DELAY)
