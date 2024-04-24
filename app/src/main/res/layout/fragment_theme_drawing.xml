@@ -5,6 +5,7 @@
     android:id="@+id/ThemeDrawingFragmentWrap"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:foregroundTint="@color/coverColor"
     tools:context=".ThemeDrawingFragment">
 
     <View
@@ -18,19 +19,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5"
-        tools:background="#DC9FA8"/>
+        tools:background="#DC9FA8" />
 
     <ImageView
         android:id="@+id/drawThemeImage"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
         android:clickable="false"
         android:contentDescription="@string/themeImage"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="1:0.90"
         app:layout_constraintEnd_toStartOf="@+id/guideline8"
         app:layout_constraintStart_toStartOf="parent"
-        tools:src="@drawable/jpseasons_m_04"/>
+        tools:src="@drawable/jp_seasons_m_04" />
 
     <ImageView
         android:id="@+id/drawThemeCover"
@@ -45,7 +47,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/cover_slash"/>
+        app:tint="@color/coverColor"
+        tools:src="@drawable/cover_slash" />
 
     <View
         android:id="@+id/overBlack"
@@ -56,7 +59,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:alpha="0"/>
+        tools:alpha="0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline8"

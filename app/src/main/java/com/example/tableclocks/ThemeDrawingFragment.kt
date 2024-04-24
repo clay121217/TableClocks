@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.example.tableclocks.databinding.FragmentThemeDrawingBinding
@@ -55,7 +56,7 @@ class ThemeDrawingFragment : Fragment() {
         fadeAnimator.duration = 400
 
         //描画
-        themeImageSet(themeName ?: "jpseasons", month ?: 1)
+        themeImageSet(themeName ?: "jp_seasons", month ?: 1)
 
         //フェードイン
         fadeAnimator.start()
@@ -63,7 +64,6 @@ class ThemeDrawingFragment : Fragment() {
 
     }
 
-//    DrawingDataを引数に描画をする
 
     companion object {
         /**
@@ -97,7 +97,7 @@ class ThemeDrawingFragment : Fragment() {
             month = newMonth
         }
 
-        //データ整形 jpseasons_m_01のようにする
+        //データ整形 jp_seasons_m_01のようにする
         val mainImgName = themeName + "_m_" + month.toString().padStart(2, '0')
         val mainImgBGColor = themeName + "_col_" + month.toString().padStart(2, '0')
         val coverImgName = themeName + "_cover"
@@ -110,6 +110,42 @@ class ThemeDrawingFragment : Fragment() {
                 requireContext().packageName
             )
         )        //getIdentifierを使う方法、Stringが使えるので引き出しやすそう
+
+        //制約をセットしてメインイメージの重力を切り替え
+        val constraintSet = ConstraintSet()
+        constraintSet.clone(binding.ThemeDrawingFragmentWrap)
+
+        //テーマ情報から重力方向取得
+        val mainImgPosition: String
+        val mainImgPositionId = resources.getIdentifier(
+            themeName + "_pos_" + month.toString().padStart(2, '0'),
+            "string",
+            requireContext().packageName
+        )
+        //見つからない場合はBOTに
+        if( mainImgPositionId == 0){
+            mainImgPosition = "BOT"
+        }else{
+            mainImgPosition = getString(mainImgPositionId)
+        }
+
+        //設定をもとに制約セット実行
+        //上制約　MIDとTOPのとき有効
+        if(mainImgPosition == "MID" || mainImgPosition == "TOP"){
+            constraintSet.connect(binding.drawThemeImage.id,ConstraintSet.TOP,ConstraintSet.PARENT_ID,ConstraintSet.TOP)
+        }else{
+            constraintSet.clear(binding.drawThemeImage.id,ConstraintSet.TOP)
+        }
+        //下制約　MIDとBOTのとき有効
+        if(mainImgPosition == "MID" || mainImgPosition == "BOT"){
+            constraintSet.connect(binding.drawThemeImage.id,ConstraintSet.BOTTOM,ConstraintSet.PARENT_ID,ConstraintSet.BOTTOM)
+        }else{
+            constraintSet.clear(binding.drawThemeImage.id,ConstraintSet.BOTTOM)
+        }
+
+        // 編集した制約をConstraintLayoutに反映させる
+        constraintSet.applyTo(binding.ThemeDrawingFragmentWrap)
+
 
         //背景色セット
         binding.drawThemeBGColor.setBackgroundColor(

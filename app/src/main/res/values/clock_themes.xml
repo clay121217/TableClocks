@@ -2,53 +2,116 @@
 <resources>
     <!--  テーマリスト  -->
     <string-array name="theme_id_arr">
-        <item>jpseasons</item>
+        <item>jp_seasons</item>
         <item>flowers</item>
-        <item>jpseasons</item>
+        <item>jp_traditional_patterns</item>
+        <item>jp_seasons</item>
         <item>flowers</item>
-        <item>jpseasons</item>
+        <item>jp_seasons</item>
         <item>flowers</item>
-        <item>jpseasons</item>
+        <item>jp_seasons</item>
         <item>flowers</item>
     </string-array>
 
-    <!--  jpseasons  -->
-    <string name="jpseasons_themeName_jp" translatable="false">日本の季節感</string>
-    <string name="jpseasons_themeName_en" translatable="false">JP Seasons</string>
-    <drawable name="jpseasons_cover">@drawable/cover_slash</drawable>
-    <string name="jpseasons_mode" translatable="false">DEFAULT_MODE</string>
-    <bool name="jpseasons_is_free">true</bool>
-    <integer name="jpseasons_feature">4</integer>
-    <color name="jpseasons_col_01">#f78b1e</color>
-    <color name="jpseasons_col_02">#aa7c21</color>
-    <color name="jpseasons_col_03">#edc52e</color>
-    <color name="jpseasons_col_04">#dc9fa8</color>
-    <color name="jpseasons_col_05">#0096ff</color>
-    <color name="jpseasons_col_06">#634ecc</color>
-    <color name="jpseasons_col_07">#64a56c</color>
-    <color name="jpseasons_col_08">#1e2d5a</color>
-    <color name="jpseasons_col_09">#caa700</color>
-    <color name="jpseasons_col_10">#cd763e</color>
-    <color name="jpseasons_col_11">#c04135</color>
-    <color name="jpseasons_col_12">#68abd6</color>
+    <!--  jp_seasons  -->
+    <string name='jp_seasons_themeName_jp' translatable='false'>日本の季節感</string>
+    <string name='jp_seasons_themeName_en' translatable='false'>JP Seasons</string>
+    <drawable name='jp_seasons_cover'>@drawable/cover_slash</drawable>
+    <bool name='jp_seasons_is_free'> true</bool>
+    <integer name='jp_seasons_feature'>4</integer>
+    <!--  カラー指定  -->
+    <color name='jp_seasons_col_01'>#f78b1e</color>
+    <color name='jp_seasons_col_02'>#aa7c21</color>
+    <color name='jp_seasons_col_03'>#edc52e</color>
+    <color name='jp_seasons_col_04'>#dc9fa8</color>
+    <color name='jp_seasons_col_05'>#0096ff</color>
+    <color name='jp_seasons_col_06'>#634ecc</color>
+    <color name='jp_seasons_col_07'>#64a56c</color>
+    <color name='jp_seasons_col_08'>#1e2d5a</color>
+    <color name='jp_seasons_col_09'>#caa700</color>
+    <color name='jp_seasons_col_10'>#cd763e</color>
+    <color name='jp_seasons_col_11'>#c04135</color>
+    <color name='jp_seasons_col_12'>#68abd6</color>
+    <!--  位置の指定:TOP MID BOT -->
+    <string name='jp_seasons_pos_01' translatable='false'>BOT</string>
+    <string name='jp_seasons_pos_02' translatable='false'>BOT</string>
+    <string name='jp_seasons_pos_03' translatable='false'>BOT</string>
+    <string name='jp_seasons_pos_04' translatable='false'>BOT</string>
+    <string name='jp_seasons_pos_05' translatable='false'>BOT</string>
+    <string name='jp_seasons_pos_06' translatable='false'>BOT</string>
+    <string name='jp_seasons_pos_07' translatable='false'>BOT</string>
+    <string name='jp_seasons_pos_08' translatable='false'>MID</string>
+    <string name='jp_seasons_pos_09' translatable='false'>BOT</string>
+    <string name='jp_seasons_pos_10' translatable='false'>BOT</string>
+    <string name='jp_seasons_pos_11' translatable='false'>MID</string>
+    <string name='jp_seasons_pos_12' translatable='false'>MID</string>
 
     <!--  flowers  -->
-    <string name="flowers_themeName_jp" translatable="false">季節の花</string>
-    <string name="flowers_themeName_en" translatable="false">Flowers</string>
-    <drawable name="flowers_cover">@drawable/cover_circle</drawable>
-    <string name="flowers_mode" translatable="false">DEFAULT_MODE</string>
-    <bool name="flowers_is_free">false</bool>
-    <integer name="flowers_feature">5</integer>
-    <color name="flowers_col_01">#ffdc00</color>
-    <color name="flowers_col_02">#ef6fdd</color>
-    <color name="flowers_col_03">#ffce33</color>
-    <color name="flowers_col_04">#ffa5b3</color>
-    <color name="flowers_col_05">#629fff</color>
-    <color name="flowers_col_06">#634ecc</color>
-    <color name="flowers_col_07">#64a56c</color>
-    <color name="flowers_col_08">#f0cc00</color>
-    <color name="flowers_col_09">#e84b4b</color>
-    <color name="flowers_col_10">#cd763e</color>
-    <color name="flowers_col_11">#f0dd00</color>
-    <color name="flowers_col_12">#65ace3</color>
+    <string name='flowers_themeName_jp' translatable='false'>季節の花</string>
+    <string name='flowers_themeName_en' translatable='false'>JP Flowers</string>
+    <drawable name='flowers_cover'>@drawable/cover_circle</drawable>
+    <bool name='flowers_is_free'> false</bool>
+    <integer name='flowers_feature'>5</integer>
+    <!--  カラー指定  -->
+    <color name='flowers_col_01'>#ffdc00</color>
+    <color name='flowers_col_02'>#ef6fdd</color>
+    <color name='flowers_col_03'>#ffce33</color>
+    <color name='flowers_col_04'>#ffa5b3</color>
+    <color name='flowers_col_05'>#629fff</color>
+    <color name='flowers_col_06'>#634ecc</color>
+    <color name='flowers_col_07'>#64a56c</color>
+    <color name='flowers_col_08'>#f0cc00</color>
+    <color name='flowers_col_09'>#e84b4b</color>
+    <color name='flowers_col_10'>#cd763e</color>
+    <color name='flowers_col_11'>#f0dd00</color>
+    <color name='flowers_col_12'>#65ace3</color>
+    <!--  位置の指定:TOP MID BOT -->
+    <string name='flowers_pos_01' translatable='false'>BOT</string>
+    <string name='flowers_pos_02' translatable='false'>MID</string>
+    <string name='flowers_pos_03' translatable='false'>BOT</string>
+    <string name='flowers_pos_04' translatable='false'>MID</string>
+    <string name='flowers_pos_05' translatable='false'>BOT</string>
+    <string name='flowers_pos_06' translatable='false'>MID</string>
+    <string name='flowers_pos_07' translatable='false'>BOT</string>
+    <string name='flowers_pos_08' translatable='false'>BOT</string>
+    <string name='flowers_pos_09' translatable='false'>BOT</string>
+    <string name='flowers_pos_10' translatable='false'>BOT</string>
+    <string name='flowers_pos_11' translatable='false'>BOT</string>
+    <string name='flowers_pos_12' translatable='false'>BOT</string>"
+
+
+    <!--  jp_traditional_patterns  -->
+    <string name='jp_traditional_patterns_themeName_jp' translatable='false'>伝統文様</string>
+    <string name='jp_traditional_patterns_themeName_en' translatable='false'>JP Traditional Patterns</string>
+    <drawable name='jp_traditional_patterns_cover'>@drawable/cover_half</drawable>
+    <bool name='jp_traditional_patterns_is_free'> true</bool>
+    <integer name='jp_traditional_patterns_feature'>6</integer>
+    <!--  カラー指定  -->
+    <color name='jp_traditional_patterns_col_01'>#CC8D7A</color>
+    <color name='jp_traditional_patterns_col_02'>#000000</color>
+    <color name='jp_traditional_patterns_col_03'>#000000</color>
+    <color name='jp_traditional_patterns_col_04'>#74B376</color>
+    <color name='jp_traditional_patterns_col_05'>#000000</color>
+    <color name='jp_traditional_patterns_col_06'>#51A098</color>
+    <color name='jp_traditional_patterns_col_07'>#000000</color>
+    <color name='jp_traditional_patterns_col_08'>#000003</color>
+    <color name='jp_traditional_patterns_col_09'>#000000</color>
+    <color name='jp_traditional_patterns_col_10'>#000000</color>
+    <color name='jp_traditional_patterns_col_11'>#000000</color>
+    <color name='jp_traditional_patterns_col_12'>#000000</color>
+    <!--  位置の指定:TOP MID BOT -->
+    <string name='jp_traditional_patterns_pos_01' translatable='false'>BOT</string>
+    <string name='jp_traditional_patterns_pos_02' translatable='false'>BOT</string>
+    <string name='jp_traditional_patterns_pos_03' translatable='false'>BOT</string>
+    <string name='jp_traditional_patterns_pos_04' translatable='false'>MID</string>
+    <string name='jp_traditional_patterns_pos_05' translatable='false'>BOT</string>
+    <string name='jp_traditional_patterns_pos_06' translatable='false'>BOT</string>
+    <string name='jp_traditional_patterns_pos_07' translatable='false'>BOT</string>
+    <string name='jp_traditional_patterns_pos_08' translatable='false'>BOT</string>
+    <string name='jp_traditional_patterns_pos_09' translatable='false'>BOT</string>
+    <string name='jp_traditional_patterns_pos_10' translatable='false'>BOT</string>
+    <string name='jp_traditional_patterns_pos_11' translatable='false'>BOT</string>
+    <string name='jp_traditional_patterns_pos_12' translatable='false'>BOT</string>
+
+
 </resources>

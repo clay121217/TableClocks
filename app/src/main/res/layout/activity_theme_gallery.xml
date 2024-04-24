@@ -92,7 +92,7 @@
                     android:layout_marginEnd="24dp"
                     android:gravity="bottom|end"
                     android:lines="1"
-                    android:textColor="@color/white"
+                    android:textColor="@color/textColor"
                     app:autoSizeMaxTextSize="60dp"
                     app:autoSizeTextType="uniform"
                     app:fontFamily="@font/rounded_mplus_1c_bold"
@@ -111,7 +111,7 @@
                     android:layout_marginEnd="24dp"
                     android:gravity="right|top|end"
                     android:lines="1"
-                    android:textColor="@color/white"
+                    android:textColor="@color/textColor"
                     android:textSize="24sp"
                     app:autoSizeTextType="none"
                     app:fontFamily="@font/rounded_mplus_1c_medium"
@@ -129,7 +129,7 @@
                     android:layout_marginEnd="24dp"
                     android:alpha="0.9"
                     android:text="@string/preview_text"
-                    android:textColor="@color/white"
+                    android:textColor="@color/textColor"
                     android:textSize="16sp"
                     app:fontFamily="@font/rounded_mplus_1c_medium"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -167,11 +167,13 @@
                 android:paddingBottom="8dp"
                 android:text="@string/themeSetBtn"
                 android:textAllCaps="false"
+                android:textColor="@color/white"
                 android:textSize="16sp"
                 android:typeface="sans"
                 app:cornerRadius="40dp"
                 app:icon="@drawable/baseline_brush_24"
-                app:iconPadding="4dp" />
+                app:iconPadding="4dp"
+                app:iconTint="@color/white" />
         </LinearLayout>
 
     </LinearLayout>

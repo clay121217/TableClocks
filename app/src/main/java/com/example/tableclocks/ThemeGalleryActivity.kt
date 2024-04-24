@@ -1,15 +1,16 @@
 package com.example.tableclocks
 
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.view.WindowInsets
-import android.view.WindowInsetsController
+import android.view.WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -26,9 +27,10 @@ import java.util.Locale
 class ThemeGalleryActivity : AppCompatActivity(), OnGalleryItemClickListener {
     private lateinit var binding: ActivityThemeGalleryBinding
 
-    var userThemeName :String = "jpseasons" //ユーザーが設定しているテーマ名のホルダー
-    var previewThemeName :String = "jpseasons" //プレビュー選択中のテーマ名のホルダー
+    private var userThemeName :String = "jp_seasons" //ユーザーが設定しているテーマ名のホルダー
+    private var previewThemeName :String = "jp_seasons" //プレビュー選択中のテーマ名のホルダー
 
+    @SuppressLint("DiscouragedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityThemeGalleryBinding.inflate(layoutInflater)
@@ -36,12 +38,12 @@ class ThemeGalleryActivity : AppCompatActivity(), OnGalleryItemClickListener {
 
         //設定取得
         val sharedPreferences = getSharedPreferences("userSettings", Context.MODE_PRIVATE)
-        val userTheme = sharedPreferences.getString("userTheme", "jpseasons")!!
+        val userTheme = sharedPreferences.getString("userTheme", "jp_seasons")!!
         userThemeName = userTheme //ついでにセット
         previewThemeName = userTheme //初期化
 
         //ギャラリーリストのフラグメント生成
-        //todo 最初に表示されているテーマをjpsesonsにするのか設定中のテーマにするのか？
+        //todo 最初に表示されているテーマをjp_seasonsにするのか設定中のテーマにするのか？
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
@@ -92,6 +94,7 @@ class ThemeGalleryActivity : AppCompatActivity(), OnGalleryItemClickListener {
 
     }
 
+    @SuppressLint("DiscouragedApi")
     private fun setPreviewText(){
 
 
@@ -106,11 +109,11 @@ class ThemeGalleryActivity : AppCompatActivity(), OnGalleryItemClickListener {
         fadeAnimator2.reverse()
 
         //テーマ名を取得、日英で逆に
-        var locale = Locale.getDefault()
-        var lang = locale.language
+        val locale = Locale.getDefault()
+        val lang = locale.language
 
-        var lang1 = ""
-        var lang2 = ""
+        val lang1: String
+        val lang2: String
         if (lang == "ja"){
             lang1 = "jp"
             lang2 = "en"
@@ -135,6 +138,7 @@ class ThemeGalleryActivity : AppCompatActivity(), OnGalleryItemClickListener {
     }
 
     //RecyclerViewのアイテムがクリックされたときのコールバック
+    @SuppressLint("DiscouragedApi")
     override fun onItemClick(themeName: String) {
 
         //連打防止
@@ -176,16 +180,16 @@ class ThemeGalleryActivity : AppCompatActivity(), OnGalleryItemClickListener {
     }
 
 //    val pref = getSharedPreferences("com.TableClocks.settings", Context.MODE_PRIVATE)
-//    val themeName = pref.getString("themeName","jpseasons")
+//    val themeName = pref.getString("themeName","jp_seasons")
 
     //todo 数秒ごと？にランダムで月変更？とにかく複数月を見られるように
 
 
     //連続でのイベント防止
-    private var DELAY: Long = 1000  // １秒未満のイベントは無視
+    private val delay: Long = 1000  // １秒未満のイベントは無視
     private var mOldTime: Long = 0  // 前回イベント実施時刻
 
-    private fun isDelayClickEvent(): Boolean = isDelayClickEvent(DELAY)
+    private fun isDelayClickEvent(): Boolean = isDelayClickEvent(delay)
     private fun isDelayClickEvent(delay: Long): Boolean {
         // 今の時間を覚える
         val time = System.currentTimeMillis()
@@ -206,26 +210,17 @@ class ThemeGalleryActivity : AppCompatActivity(), OnGalleryItemClickListener {
         super.onResume()
 
         //ステータスバーとナビゲーションバー消す
-        // API 30以上の場合
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        // API 31以上の場合
+        // API 30から切り替えるべきだが「戻る」で帰ってきたあと挙動が違う、31から平気っぽい
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             window.decorView.windowInsetsController?.apply {
                 // systemBars : Status barとNavigation bar両方
                 hide(WindowInsets.Type.systemBars())
-                // hide(WindowInsets.Type.statusBars())
-                // hide(WindowInsets.Type.navigationBars())
-                systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+                systemBarsBehavior = BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
 
             }
 
-//            //ノッチ侵略用
-//            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-//                val attrib = window.attributes
-//                attrib.layoutInDisplayCutoutMode =
-//                    WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
-//            }
-
-            // API 29以下の場合
+            // APIがそれ以下の場合
         } else {
             window.decorView.systemUiVisibility = (
                     View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
@@ -233,6 +228,14 @@ class ThemeGalleryActivity : AppCompatActivity(), OnGalleryItemClickListener {
                             or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                             or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                             or View.SYSTEM_UI_FLAG_FULLSCREEN)
+        }
+
+        //ノッチ侵略用 API 28以上
+        window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            val attrib = window.attributes
+            attrib.layoutInDisplayCutoutMode =
+                WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
         }
     }
 }

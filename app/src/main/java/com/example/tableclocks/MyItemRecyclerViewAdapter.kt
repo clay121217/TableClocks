@@ -1,5 +1,6 @@
 package com.example.tableclocks
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -8,20 +9,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.tableclocks.databinding.FragmentThemeGalleryBinding
 
-import com.example.tableclocks.placeholder.PlaceholderContent.PlaceholderItem
 import java.util.Locale
 
-
-/**
- * [RecyclerView.Adapter] that can display a [PlaceholderItem].
- * TODO: Replace the implementation with code for your data type.
- */
-/*
-* todo:GPTに中身の実装アイデア聞いたのでそれ参照
-* アイテムがクリックされたらpositionとクリックイベントを親アクティビティ(ここではtheme)知らせる方法
-*
-*
- */
 class MyItemRecyclerViewAdapter(
     private val values: Array<String>,
     private val context: Context,
@@ -40,6 +29,7 @@ class MyItemRecyclerViewAdapter(
 
     }
 
+    @SuppressLint("DiscouragedApi")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         //リスト用画像
         holder.galleryItemBGView.setImageResource(
@@ -51,11 +41,11 @@ class MyItemRecyclerViewAdapter(
         )
         //タイトルセット
         //テーマ名を取得、日英で逆に
-        var locale = Locale.getDefault()
-        var lang = locale.language
+        val locale = Locale.getDefault()
+        val lang = locale.language
 
-        var lang1 = ""
-        var lang2 = ""
+        val lang1: String
+        val lang2: String
         if (lang == "ja"){
             lang1 = "jp"
             lang2 = "en"
@@ -65,14 +55,14 @@ class MyItemRecyclerViewAdapter(
         }
         holder.themeNameView.text = context.getString(
             context.resources.getIdentifier(
-                values[position] + "_themeName_"+lang1,
+                values[position] + "_themeName_" + lang1,
                 "string",
                 context.packageName
             )
         )
         holder.subThemeNameView.text = context.getString(
             context.resources.getIdentifier(
-                values[position] + "_themeName_"+lang2,
+                values[position] + "_themeName_" + lang2,
                 "string",
                 context.packageName
             )
