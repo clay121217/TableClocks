@@ -1,5 +1,6 @@
 package com.example.tableclocks
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
@@ -153,6 +154,7 @@ class MainActivity : AppCompatActivity() {
 
     //テスト用ボタン
     //月を切り替えられるように
+    @SuppressLint("SetTextI18n")
     private fun themeTestButton() {
         //ボタン実装
         val themeTestButton = Button(this)

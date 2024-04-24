@@ -123,10 +123,10 @@ class ThemeDrawingFragment : Fragment() {
             requireContext().packageName
         )
         //見つからない場合はBOTに
-        if( mainImgPositionId == 0){
-            mainImgPosition = "BOT"
+        mainImgPosition = if( mainImgPositionId == 0){
+            "BOT"
         }else{
-            mainImgPosition = getString(mainImgPositionId)
+            getString(mainImgPositionId)
         }
 
         //設定をもとに制約セット実行
