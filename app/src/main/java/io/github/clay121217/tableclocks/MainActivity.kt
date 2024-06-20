@@ -25,7 +25,6 @@ import java.util.Calendar
 import java.util.Date
 
 
-//todo 設定用のActivityを作らないと？設定項目を考えないと・・・タイムゾーンとかお問い合わせとかバージョン情報とか
 //todo Amazonに出せるようにするかも？ビルドバリアント作るのかな
 
 class MainActivity : AppCompatActivity() {
@@ -43,7 +42,6 @@ class MainActivity : AppCompatActivity() {
         //テーマが有効かチェック
         val isActive:Boolean = isActiveTheme(userTheme)
         //無効なテーマならデフォルトテーマに書き換え
-        //todo 設定まで書き換えに行く？
         if(!isActive){
             userTheme = "jp_seasons"
             sharedPreferences.edit().putString("userTheme",userTheme).apply()
@@ -68,7 +66,6 @@ class MainActivity : AppCompatActivity() {
         _handler?.post(_runnable)
 
         //設定画面ボタン
-        //todo 設定画面ができたら差し替え
         val settingsBtn = binding.settingsBtn
         settingsBtn.setOnClickListener {
             val intent = Intent(application, SettingsActivity::class.java)

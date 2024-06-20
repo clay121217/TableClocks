@@ -29,7 +29,6 @@
     <string name="themes_gallery_title">Themes</string>
     <string name="themeSettingBtn">Select</string>
     <string name="themeSetBtn">Set theme</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="Settings_General">General</string>
     <string name="set_dark_mode_text_true">Dark mode</string>
     <string name="set_dark_mode_text_false">Light mode</string>
@@ -42,5 +41,4 @@
     <string name="settings_contact_title">Contact (open meil app.)</string>
     <string name="err_mailapp_missing">Can\'t find the mail app.</string>
     <string name="settings_title">Settings</string>
-    <!-- TODO: Remove or change this placeholder text -->
 </resources>

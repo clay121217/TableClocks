@@ -42,7 +42,6 @@ class ThemeGalleryActivity : AppCompatActivity(), OnGalleryItemClickListener {
         previewThemeName = userTheme //初期化
 
         //ギャラリーリストのフラグメント生成
-        //todo 最初に表示されているテーマをjp_seasonsにするのか設定中のテーマにするのか？
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
@@ -182,8 +181,7 @@ class ThemeGalleryActivity : AppCompatActivity(), OnGalleryItemClickListener {
         }
     }
 
-    //todo 数秒ごと？にランダムで月変更？とにかく複数月を見られるように
-
+    //todo 数秒ごと？にランダムで月変更？とにかく複数月を見られるようにする？
 
     //連続でのイベント防止
     private val delay: Long = 1000  // １秒未満のイベントは無視
