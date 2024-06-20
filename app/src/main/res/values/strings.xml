@@ -30,4 +30,17 @@
     <string name="themeSettingBtn">Select</string>
     <string name="themeSetBtn">Set theme</string>
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="Settings_General">General</string>
+    <string name="set_dark_mode_text_true">Dark mode</string>
+    <string name="set_dark_mode_text_false">Light mode</string>
+    <string name="set_dark_mode_text_system">Follow system</string>
+    <string name="set_dark_mode_title">Dark mode (Android 10~)</string>
+    <string name="title_activity_restart" translatable="false">RestartActivity</string>
+    <string name="restart_dialog_text">Restart the application to reflect the changes.</string>
+    <string name="Settings_Info">Information</string>
+    <string name="Settings_appversion_title">App Version</string>
+    <string name="settings_contact_title">Contact (open meil app.)</string>
+    <string name="err_mailapp_missing">Can\'t find the mail app.</string>
+    <string name="settings_title">Settings</string>
+    <!-- TODO: Remove or change this placeholder text -->
 </resources>

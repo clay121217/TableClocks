@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<io.github.clay121217.tableclocks.AspectRatioCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/galleryListItemCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="4dp"
@@ -13,23 +14,79 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:foregroundTint="@color/coverColor">
 
-        <ImageView
-            android:id="@+id/galleryItemBG"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:clickable="false"
-            android:outlineProvider="bounds"
-            android:scaleType="centerCrop"
+        <View
+            android:id="@+id/galleryThemeBGColor"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#333333"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.5"
-            app:srcCompat="@drawable/jp_seasons_li" />
+            tools:background="#DC9FA8" />
+
+        <ImageView
+            android:id="@+id/galleryThemeImage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:clickable="false"
+            android:contentDescription="@string/themeImage"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline10"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:src="@drawable/jp_seasons_m_04" />
+
+        <ImageView
+            android:id="@+id/galleryThemeCover"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="@dimen/imageCoverAlpha"
+            android:background="#00DC9FA8"
+            android:contentDescription="@string/main_image_cover_description"
+            android:elevation="0dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/coverColor"
+            tools:src="@drawable/cover_slash_li" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.35" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+<!--        <ImageView-->
+<!--            android:id="@+id/galleryItemBG"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:adjustViewBounds="true"-->
+<!--            android:clickable="false"-->
+<!--            android:outlineProvider="bounds"-->
+<!--            android:scaleType="centerCrop"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.5"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0.5"-->
+<!--            app:srcCompat="@drawable/jp_seasons_li" />-->
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/themeName"
@@ -43,7 +100,7 @@
             android:text="@string/jp_seasons_themeName_jp"
             android:textAlignment="textEnd"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/white"
+            android:textColor="@color/textColor"
             app:autoSizeMaxTextSize="30sp"
             app:autoSizeTextType="uniform"
             app:fontFamily="@font/rounded_mplus_1c_medium"
@@ -64,14 +121,15 @@
             android:text="@string/jp_seasons_themeName_en"
             android:textAlignment="textEnd"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/white"
+            android:textColor="@color/textColor"
             app:autoSizeMaxTextSize="20sp"
             app:autoSizeTextType="uniform"
             app:fontFamily="@font/rounded_mplus_1c_medium"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline6"
-            app:layout_constraintTop_toTopOf="@+id/guideline7" />
+            app:layout_constraintTop_toTopOf="@+id/guideline7"
+            />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline6"
@@ -89,4 +147,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.cardview.widget.CardView>
+</io.github.clay121217.tableclocks.AspectRatioCardView>

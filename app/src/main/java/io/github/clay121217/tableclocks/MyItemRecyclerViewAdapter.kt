@@ -1,13 +1,15 @@
-package com.example.tableclocks
+package io.github.clay121217.tableclocks
 
 import android.annotation.SuppressLint
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.example.tableclocks.databinding.FragmentThemeGalleryBinding
+import androidx.core.content.ContextCompat
+import io.github.clay121217.tableclocks.databinding.FragmentThemeGalleryBinding
 
 import java.util.Locale
 
@@ -31,14 +33,45 @@ class MyItemRecyclerViewAdapter(
 
     @SuppressLint("DiscouragedApi")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        //リスト用画像
-        holder.galleryItemBGView.setImageResource(
+        //カードアス比セット
+        //todo:アス比がきかない
+        holder.galleryListItemCard.setAspectRatio(3.0f)
+
+        //設定取得・整理
+        val featureMonth = context.resources.getInteger(
             context.resources.getIdentifier(
-                values[position] + "_li",
-                "drawable",
+                values[position] + "_feature",
+                "integer",
                 context.packageName
             )
         )
+
+        val mainImgName = values[position] + "_m_" + featureMonth.toString().padStart(2, '0')
+        val mainImgBGColor = values[position] + "_col_" + featureMonth.toString().padStart(2, '0')
+        val coverImgName = values[position] + "_cover_li"
+
+        //画像セット
+        holder.galleryThemeImage.setImageResource(
+            context.resources.getIdentifier(
+                mainImgName,"drawable",context.packageName
+            )
+        )
+
+        //背景色
+        holder.galleryThemeBGColor.setBackgroundColor(
+            ContextCompat.getColor(
+                context,
+                context.resources.getIdentifier(mainImgBGColor, "color", context.packageName)
+            )
+        )
+
+        //カバーセット
+        holder.galleryThemeCover.setImageResource(
+            context.resources.getIdentifier(
+                coverImgName,"drawable",context.packageName
+            )
+        )
+
         //タイトルセット
         //テーマ名を取得、日英で逆に
         val locale = Locale.getDefault()
@@ -69,7 +102,7 @@ class MyItemRecyclerViewAdapter(
         )
 
         //クリックリスナー
-        holder.galleryItemBGView.setOnClickListener {
+        holder.galleryListItemCard.setOnClickListener {
             // アイテムがクリックされたときに、クリックイベントをアクティビティに通知
             itemClickListener.onItemClick(values[position])
         }
@@ -80,9 +113,13 @@ class MyItemRecyclerViewAdapter(
 
     inner class ViewHolder(binding: FragmentThemeGalleryBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        val galleryItemBGView: ImageView = binding.galleryItemBG
-        val themeNameView: TextView = binding.themeName
-        val subThemeNameView: TextView = binding.subThemeName
-    }
+            val galleryListItemCard: AspectRatioCardView = binding.galleryListItemCard
+            val galleryThemeCover: ImageView = binding.galleryThemeCover
+            val galleryThemeImage: ImageView = binding.galleryThemeImage
+            val galleryThemeBGColor: View = binding.galleryThemeBGColor
 
+//            val galleryItemBGView: ImageView = binding.galleryItemBG
+            val themeNameView: TextView = binding.themeName
+            val subThemeNameView: TextView = binding.subThemeName
+    }
 }

@@ -5,18 +5,13 @@
         <item>jp_seasons</item>
         <item>flowers</item>
         <item>jp_traditional_patterns</item>
-        <item>jp_seasons</item>
-        <item>flowers</item>
-        <item>jp_seasons</item>
-        <item>flowers</item>
-        <item>jp_seasons</item>
-        <item>flowers</item>
     </string-array>
 
     <!--  jp_seasons  -->
     <string name='jp_seasons_themeName_jp' translatable='false'>日本の季節感</string>
     <string name='jp_seasons_themeName_en' translatable='false'>JP Seasons</string>
     <drawable name='jp_seasons_cover'>@drawable/cover_slash</drawable>
+    <drawable name='jp_seasons_cover_li'>@drawable/cover_slash_li</drawable>
     <bool name='jp_seasons_is_free'> true</bool>
     <integer name='jp_seasons_feature'>4</integer>
     <!--  カラー指定  -->
@@ -50,7 +45,8 @@
     <string name='flowers_themeName_jp' translatable='false'>季節の花</string>
     <string name='flowers_themeName_en' translatable='false'>JP Flowers</string>
     <drawable name='flowers_cover'>@drawable/cover_circle</drawable>
-    <bool name='flowers_is_free'> false</bool>
+    <drawable name='flowers_cover_li'>@drawable/cover_circle_li</drawable>
+    <bool name='flowers_is_free'> true</bool>
     <integer name='flowers_feature'>5</integer>
     <!--  カラー指定  -->
     <color name='flowers_col_01'>#ffdc00</color>
@@ -77,41 +73,40 @@
     <string name='flowers_pos_09' translatable='false'>BOT</string>
     <string name='flowers_pos_10' translatable='false'>BOT</string>
     <string name='flowers_pos_11' translatable='false'>BOT</string>
-    <string name='flowers_pos_12' translatable='false'>BOT</string>"
-
+    <string name='flowers_pos_12' translatable='false'>BOT</string>
 
     <!--  jp_traditional_patterns  -->
     <string name='jp_traditional_patterns_themeName_jp' translatable='false'>伝統文様</string>
     <string name='jp_traditional_patterns_themeName_en' translatable='false'>JP Traditional Patterns</string>
     <drawable name='jp_traditional_patterns_cover'>@drawable/cover_half</drawable>
+    <drawable name='jp_traditional_patterns_cover_li'>@drawable/cover_half_li</drawable>
     <bool name='jp_traditional_patterns_is_free'> true</bool>
     <integer name='jp_traditional_patterns_feature'>6</integer>
     <!--  カラー指定  -->
     <color name='jp_traditional_patterns_col_01'>#CC8D7A</color>
-    <color name='jp_traditional_patterns_col_02'>#000000</color>
-    <color name='jp_traditional_patterns_col_03'>#000000</color>
+    <color name='jp_traditional_patterns_col_02'>#db912b</color>
+    <color name='jp_traditional_patterns_col_03'>#086896</color>
     <color name='jp_traditional_patterns_col_04'>#74B376</color>
-    <color name='jp_traditional_patterns_col_05'>#000000</color>
+    <color name='jp_traditional_patterns_col_05'>#c38926</color>
     <color name='jp_traditional_patterns_col_06'>#51A098</color>
-    <color name='jp_traditional_patterns_col_07'>#000000</color>
-    <color name='jp_traditional_patterns_col_08'>#000003</color>
-    <color name='jp_traditional_patterns_col_09'>#000000</color>
-    <color name='jp_traditional_patterns_col_10'>#000000</color>
-    <color name='jp_traditional_patterns_col_11'>#000000</color>
-    <color name='jp_traditional_patterns_col_12'>#000000</color>
+    <color name='jp_traditional_patterns_col_07'>#497084</color>
+    <color name='jp_traditional_patterns_col_08'>#5fa9d1</color>
+    <color name='jp_traditional_patterns_col_09'>#c57360</color>
+    <color name='jp_traditional_patterns_col_10'>#3e6eb3</color>
+    <color name='jp_traditional_patterns_col_11'>#9d8de6</color>
+    <color name='jp_traditional_patterns_col_12'>#82a34f</color>
     <!--  位置の指定:TOP MID BOT -->
-    <string name='jp_traditional_patterns_pos_01' translatable='false'>BOT</string>
+    <string name='jp_traditional_patterns_pos_01' translatable='false'>MID</string>
     <string name='jp_traditional_patterns_pos_02' translatable='false'>BOT</string>
     <string name='jp_traditional_patterns_pos_03' translatable='false'>BOT</string>
     <string name='jp_traditional_patterns_pos_04' translatable='false'>MID</string>
     <string name='jp_traditional_patterns_pos_05' translatable='false'>BOT</string>
-    <string name='jp_traditional_patterns_pos_06' translatable='false'>BOT</string>
+    <string name='jp_traditional_patterns_pos_06' translatable='false'>MID</string>
     <string name='jp_traditional_patterns_pos_07' translatable='false'>BOT</string>
     <string name='jp_traditional_patterns_pos_08' translatable='false'>BOT</string>
     <string name='jp_traditional_patterns_pos_09' translatable='false'>BOT</string>
     <string name='jp_traditional_patterns_pos_10' translatable='false'>BOT</string>
     <string name='jp_traditional_patterns_pos_11' translatable='false'>BOT</string>
     <string name='jp_traditional_patterns_pos_12' translatable='false'>BOT</string>
-
 
 </resources>

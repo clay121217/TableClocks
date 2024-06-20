@@ -2,4 +2,5 @@
 <resources>
     <color name="textColor">#bfFFFFFF</color>
     <color name="coverColor">#000000</color>
+    <color name="bgColor">#D3D3D3</color>
 </resources>

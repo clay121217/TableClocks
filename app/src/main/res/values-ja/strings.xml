@@ -7,4 +7,15 @@
     <string name="themes_gallery_title">テーマ</string>
     <string name="themeSettingBtn">決定</string>
     <string name="themeSetBtn">テーマ決定</string>
+    <string name="Settings_General">基本</string>
+    <string name="set_dark_mode_text_true">ダークモード</string>
+    <string name="set_dark_mode_text_false">ライトモード</string>
+    <string name="set_dark_mode_text_system">システム設定に従う</string>
+    <string name="set_dark_mode_title">ダークモード (Android10~)</string>
+    <string name="restart_dialog_text">設定を反映するため、アプリを再起動します。</string>
+    <string name="Settings_Info">情報</string>
+    <string name="Settings_appversion_title">バージョン情報</string>
+    <string name="settings_contact_title">お問い合わせ (メールアプリ起動)</string>
+    <string name="err_mailapp_missing">メールアプリが見つかりません。</string>
+    <string name="settings_title">設定</string>
 </resources>

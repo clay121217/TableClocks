@@ -1,4 +1,4 @@
-package com.example.tableclocks
+package io.github.tableclocks
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

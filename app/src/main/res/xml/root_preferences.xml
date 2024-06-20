@@ -1,40 +1,44 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:title="@string/messages_header">
+    <PreferenceCategory
+        android:title="@string/Settings_General"
+        app:iconSpaceReserved="false">
+        <ListPreference
+            android:defaultValue="MODE_NIGHT_FOLLOW_SYSTEM"
+            android:entries="@array/set_dark_mode_text"
+            android:entryValues="@array/set_dark_mode_val"
+            android:key="set_dark_mode"
+            android:title="@string/set_dark_mode_title"
+            app:iconSpaceReserved="false"
+            app:isPreferenceVisible="true"
+            app:shouldDisableView="true"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/Settings_Info"
+        app:iconSpaceReserved="false">
 
         <EditTextPreference
-            app:key="signature"
-            app:title="@string/signature_title"
+            android:key="app_ver"
+            android:selectAllOnFocus="true"
+            android:singleLine="false"
+            android:title="@string/Settings_appversion_title"
+            app:enabled="false"
+            app:iconSpaceReserved="false"
+            app:selectable="false"
+            app:shouldDisableView="false"
             app:useSimpleSummaryProvider="true" />
 
-        <ListPreference
-            app:defaultValue="reply"
-            app:entries="@array/reply_entries"
-            app:entryValues="@array/reply_values"
-            app:key="reply"
-            app:title="@string/reply_title"
-            app:useSimpleSummaryProvider="true" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory app:title="@string/sync_header">
-
-        <SwitchPreferenceCompat
-            app:key="sync"
-            app:title="@string/sync_title" />
-
-        <SwitchPreferenceCompat
-            app:dependency="sync"
-            app:key="attachment"
-            app:summaryOff="@string/attachment_summary_off"
-            app:summaryOn="@string/attachment_summary_on"
-            app:title="@string/attachment_title" />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="check_box_preference_1"
-            android:title="Check box preference" />
-
+        <Preference
+            android:title="@string/settings_contact_title"
+            app:iconSpaceReserved="false"
+            app:key="contact">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="mailto:"
+                />
+        </Preference>
     </PreferenceCategory>
 
 </PreferenceScreen>

@@ -1,4 +1,4 @@
-package com.example.tableclocks
+package io.github.tableclocks
 
 import org.junit.Test
 

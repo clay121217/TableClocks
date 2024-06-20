@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="textColor">#bf000000</color>
     <color name="coverColor">#FFFFFF</color>
+    <color name="bgColor">#D3D3D3</color>
+    <color name="navbarBgColor">#464646</color>
+    <color name="grayTextColor">#AAAAAA</color>
 </resources>
