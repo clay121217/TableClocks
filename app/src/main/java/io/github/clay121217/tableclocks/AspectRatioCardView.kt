@@ -22,7 +22,6 @@ class AspectRatioCardView @JvmOverloads constructor(
     //画面縦横比をそのままセットするメソッド
     fun setByScreenAspectRatio(){
         //プレビューカードに縦横比をセット
-        //todo: なんか微妙にズレているきがする？
         val displayMetrics = resources.displayMetrics
         val screenWidth = displayMetrics.widthPixels
         val screenHeight = displayMetrics.heightPixels
@@ -47,29 +46,4 @@ class AspectRatioCardView @JvmOverloads constructor(
         val newHeightMeasureSpec = MeasureSpec.makeMeasureSpec(heightSize, MeasureSpec.EXACTLY)
         super.onMeasure(widthMeasureSpec, newHeightMeasureSpec)
     }
-
-//    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-//        val widthSize = MeasureSpec.getSize(widthMeasureSpec)
-//        val heightSize: Int
-//
-//        // 画面の向きによって縦横比を調整
-//        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-//            // 横向きの場合
-//            heightSize = (widthSize / aspectRatio).toInt()
-//        } else {
-//            // 縦向きの場合
-//            heightSize = (widthSize * aspectRatio).toInt()
-//        }
-//
-//        val newHeightMeasureSpec = MeasureSpec.makeMeasureSpec(heightSize, MeasureSpec.EXACTLY)
-//        super.onMeasure(widthMeasureSpec, newHeightMeasureSpec)
-//
-//        //プレビューカードに縦横比をセット
-//        //todo: なんか微妙にズレているきがする？
-//        val displayMetrics = resources.displayMetrics
-//        val screenWidth = displayMetrics.widthPixels
-//        val screenHeight = displayMetrics.heightPixels
-//        val aspectRatio = screenWidth.toFloat() / screenHeight
-//        setAspectRatio(aspectRatio)
-//    }
 }

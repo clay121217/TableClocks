@@ -90,7 +90,7 @@ class SettingsActivity : AppCompatActivity() , Preference.OnPreferenceChangeList
     //クリックリスナーの実体
     override fun onPreferenceClick(preference: Preference): Boolean {
         // 変更された設定項目 (preference) のkeyを取得
-        val changedPreferenceKey = preference.key
+//        val changedPreferenceKey = preference.key
 
 //        when(changedPreferenceKey){
 //

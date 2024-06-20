@@ -34,7 +34,6 @@ class MyItemRecyclerViewAdapter(
     @SuppressLint("DiscouragedApi")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         //カードアス比セット
-        //todo:アス比がきかない
         holder.galleryListItemCard.setAspectRatio(3.0f)
 
         //設定取得・整理
