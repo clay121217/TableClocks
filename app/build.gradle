@@ -5,11 +5,24 @@ plugins {
 
 android {
     signingConfigs {
+        debug {}
         release {
-            storeFile file('C:\\Users\\daisu\\OneDrive\\ドキュメント\\APP開発\\keystore\\keystore001.jks')
-            storePassword 'Ns5Xhari'
-            keyPassword 'vW6g8csN'
-            keyAlias 'key001'
+            if (project.hasProperty("Keys.repo")) {
+                def projectPropsFile = file("C:\\Users\\daisu\\.signing\\tableclocks\\tableclocks.properties")
+                if (projectPropsFile.exists()) {
+                    Properties props = new Properties()
+                    props.load(new FileInputStream(projectPropsFile))
+
+                    storeFile file(file("C:\\Users\\daisu\\.signing\\tableclocks\\keystore001.jks"))
+                    storePassword props['RELEASE_STORE_PASS']
+                    keyAlias props['RELEASE_ALIAS']
+                    keyPassword props['RELEASE_KEY_PASS']
+                }
+            } else {
+                println "======================================================="
+                println "[ERROR] - Please configure release-compilation environment - e.g. in ~/.signing  directory"
+                println "======================================================="
+            }
         }
     }
     namespace 'io.github.clay121217.tableclocks'
