@@ -39,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:alpha="@dimen/imageCoverAlpha"
-        android:background="#00DC9FA8"
+        android:background="#00DC9F9F"
         android:contentDescription="@string/main_image_cover_description"
         android:elevation="0dp"
         android:scaleType="fitXY"
