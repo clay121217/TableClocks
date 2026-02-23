@@ -5,6 +5,7 @@
         <item>jp_seasons</item>
         <item>flowers</item>
         <item>jp_traditional_patterns</item>
+        <item>fruits</item>
     </string-array>
 
     <!--  jp_seasons  -->
@@ -108,5 +109,40 @@
     <string name='jp_traditional_patterns_pos_10' translatable='false'>BOT</string>
     <string name='jp_traditional_patterns_pos_11' translatable='false'>BOT</string>
     <string name='jp_traditional_patterns_pos_12' translatable='false'>BOT</string>
+
+    <!--  fruits  -->
+    <string name='fruits_themeName_jp' translatable='false'>フルーツ</string>
+    <string name='fruits_themeName_en' translatable='false'>Fruits</string>
+    <drawable name='fruits_cover'>@drawable/cover_circle</drawable>
+    <drawable name='fruits_cover_li'>@drawable/cover_circle_li</drawable>
+    <bool name='fruits_is_free'> true</bool>
+    <integer name='fruits_feature'>8</integer>
+    <!--  カラー指定  -->
+    <color name='fruits_col_01'>#FF7ABA</color>
+    <color name='fruits_col_02'>#FF5040</color>
+    <color name='fruits_col_03'>#FFA833</color>
+    <color name='fruits_col_04'>#77E875</color>
+    <color name='fruits_col_05'>#FF8E73</color>
+    <color name='fruits_col_06'>#FF1D2F</color>
+    <color name='fruits_col_07'>#FF5995</color>
+    <color name='fruits_col_08'>#F0CC00</color>
+    <color name='fruits_col_09'>#8F55C3</color>
+    <color name='fruits_col_10'>#FF5F38</color>
+    <color name='fruits_col_11'>#B5D043</color>
+    <color name='fruits_col_12'>#E7D300</color>
+    <!--  位置の指定:TOP MID BOT -->
+    <string name='fruits_pos_01' translatable='false'>MID</string>
+    <string name='fruits_pos_02' translatable='false'>MID</string>
+    <string name='fruits_pos_03' translatable='false'>MID</string>
+    <string name='fruits_pos_04' translatable='false'>MID</string>
+    <string name='fruits_pos_05' translatable='false'>MID</string>
+    <string name='fruits_pos_06' translatable='false'>MID</string>
+    <string name='fruits_pos_07' translatable='false'>MID</string>
+    <string name='fruits_pos_08' translatable='false'>MID</string>
+    <string name='fruits_pos_09' translatable='false'>MID</string>
+    <string name='fruits_pos_10' translatable='false'>MID</string>
+    <string name='fruits_pos_11' translatable='false'>MID</string>
+    <string name='fruits_pos_12' translatable='false'>MID</string>
+
 
 </resources>
